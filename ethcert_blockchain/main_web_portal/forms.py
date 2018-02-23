@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from main_web_portal.models import UserProfile,Transaction
+from main_web_portal.models import UserProfile
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
@@ -14,10 +14,3 @@ class UserProfileInfoForm(forms.ModelForm):
     class Meta():
         model = UserProfile
         fields = ('profile_pic',)
-
-
-class TransactionForm(forms.ModelForm):
-    class Meta():
-        model = Transaction
-        fields = ('transaction_amount',
-        'receiver','validity','certificate')

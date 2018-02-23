@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from main_web_portal.forms import UserForm,UserProfileInfoForm,TransactionForm
+from main_web_portal.forms import UserForm,UserProfileInfoForm
 
 # Extra Imports for the Login and Logout Capabilities
 from django.contrib.auth import authenticate, login, logout
@@ -17,7 +17,7 @@ def user_logout(request):
     # Log out the user.
     logout(request)
     # Return to homepage.
-    return HttpResponseRedirect(reverse('index'))
+    return render(request,"main_web_portal/index.html")
 
 
 def register(request):
@@ -98,7 +98,7 @@ def user_login(request):
                 login(request,user)
                 # Send the user back to some page.
                 # In this case their homepage.
-                return render(request, 'main_web_portal/index.html', {})
+                return render(request, 'main_web_portal/logout.html', {})
             else:
                 # If account is not active:
                 return HttpResponse("Your account is not active.")
@@ -110,60 +110,3 @@ def user_login(request):
     else:
         #Nothing has been provided for username or password.
         return render(request, 'main_web_portal/login.html', {})
-
-
-@login_required
-def issue(request):
-
-    if request.user.is_authenticated:
-        print(request.user)
-
-
-    issued = False
-
-    if request.method == 'POST':
-        # Get info from "both" forms
-        # It appears as one form to the user on the .html page
-        transaction_form = TransactionForm(data=request.POST)
-
-        # Check to see both forms are valid
-        if transaction_form.is_valid():
-            # Save User Form to Database
-            transaction = transaction_form.save()
-
-            # Hash the password
-
-            # Update with Hashed password
-            transaction.save(commit=False)
-
-            # Now we deal with the extra info!
-
-            # Set One to One relationship between
-            # TransactionForm and UserProfileInfoForm
-            transaction.awarding_organization = request.user
-
-            # Check if they provided a profile picture
-            if 'certificate' in request.FILES:
-                print('found it')
-                # If yes, then grab it from the POST form reply
-                transaction.certificate = request.FILES['certificate']
-
-            # Now save model
-            transaction.save()
-
-            # Registration Successful!
-            issued = True
-
-        else:
-            # One of the forms was invalid if this else gets called.
-            print(transaction_form.errors)
-
-    else:
-        # Was not an HTTP post so we just render the forms as blank.
-        transaction_form = TransactionForm()
-
-    # This is the render and context dictionary to feed
-    # back to the registration.html file page.
-    return render(request,'main_web_portal/issue.html',
-                          {'transaction_form':transaction_form,
-                           'issued':issued})

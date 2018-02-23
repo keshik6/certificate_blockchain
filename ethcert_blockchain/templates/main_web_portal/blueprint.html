@@ -1,25 +1,25 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html>
   <head>
     <meta charset="utf-8">
     <title></title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="media/static/main_web_portal/base_style.css">
   </head>
 
+  
   <body>
   	<!-- DOCUMENTATION NAVBAR -->
-  	<nav class="navbar navbar-default navbar-inverse navbar-fixed-top">
+  	<nav class="navbar navbar navbar-inverse navbar-fixed-top">
       <!-- Inside of a Container -->
     <div class="container-fluid">
 
       <!-- Brand and toggle get grouped for better mobile display -->
       <!-- This is the actual code that create the "hamburger icon" -->
       <!-- The data-target grabs ids to put into the icon -->
-      <div class="navbar-header">
+      <div class="navbar-header" height="100">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-
           <!--  Code for the hamburger icon-->
           <!--<span class="sr-only">Toggle navigation</span>-->
           <span class="icon-bar"></span>
@@ -27,15 +27,17 @@
           <span class="icon-bar"></span>
 
         </button>
-
-          <a class="navbar-brand" href="{% url 'index'%}"><b>ethCert</b></a>
-
+          <a href="{% url 'index'%}" class="navbar-brand"><b>ETHCERT.IO</b></a>
 
       </div>
+
+
 
       <!-- Anything inside of collapse navbar-collapse goes into the "hamburger" -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
+          <li><a href="{% url 'main_web_portal:user_login'%}">Sign in<span class="sr-only">(current)</span></a></li>
+          <li><a href="{% url 'main_web_portal:register'%}">Register<span class="sr-only">(current)</span></a></li>
           <li><a href="#">Contact Us<span class="sr-only">(current)</span></a></li>
           <li><a href="#">Our Team</a></li>
         </ul>

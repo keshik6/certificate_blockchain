@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.contrib.postgres.fields import ArrayField
 
 # Create your models here.
 class UserProfile(models.Model):
@@ -17,19 +16,3 @@ class UserProfile(models.Model):
     def __str__(self):
         # Built-in attribute of django.contrib.auth.models.User !
         return self.user.username
-
-
-class Transaction(models.Model):
-    awarding_organization = models.ForeignKey(UserProfile)
-    transaction_hash = models.CharField(max_length=64)
-    access_token = models.CharField(max_length=64)
-    transaction_time = models.DateTimeField(auto_now=True)
-    transaction_amount = models.FloatField()
-    receiver = models.CharField(max_length=64)
-    validity = models.DurationField()
-
-    #This is the actual certificate
-    certificate = models.ImageField(upload_to='certificates',blank=True)
-
-    def __str__(self):
-        return self.transaction_hash
