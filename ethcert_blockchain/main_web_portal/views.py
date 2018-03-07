@@ -110,3 +110,6 @@ def user_login(request):
     else:
         #Nothing has been provided for username or password.
         return render(request, 'main_web_portal/login.html', {})
+
+def transaction(request):
+    return render(request,"main_web_portal/transaction.html")

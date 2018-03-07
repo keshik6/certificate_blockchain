@@ -1,0 +1,25 @@
+{% extends "main_web_portal/blueprint.html" %}
+{% load staticfiles %}
+
+{% block body_block %}
+    <div class="jumbotron">
+      	<h1>Issue Certificate</h1>
+    </div>
+    
+		<div class="container">
+			<form action="" method="get" accept-charset="utf-8">
+				Sender Proof:<br>
+				<input type="text" name="senderproof"><br>
+				Receiver Address:<br>
+				<input type="text" name="receiveraddr"><br>
+				Receiver Proof:<br>
+				<input type="text" name="receiverproof"><br>
+				Description:<br>
+				<textarea name="description" style="width:250px;height:150px;" placeholder="Enter certificate details"></textarea>
+
+				<input type="submit" value="Submit" onclick="createCertificate(this.form);">
+			</form>
+
+		</div>
+
+{% endblock %}
