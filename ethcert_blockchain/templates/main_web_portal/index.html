@@ -2,17 +2,27 @@
 {% load staticfiles %}
 {% block body_block %}
 
-<div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1 class="display-4" align="center">Welcome</h1>
-    <img src="{% static 'ethcertLogo.png'%}" alt="" align="right">
-    <p class="lead">As financial institutions, educational institutions, corporate companies, businesses and governments continue their tedious work of tackling all forms of frauds, certificate frauds and forgery had become one of the prominent threats to organizational safety and development. With certificate verification process being usually compromised and unstandardized, organizational safety and development could potentially become an intricate and intimidating question.
-    </p>
-    <p class="lead">
-      <a class="btn btn-primary btn-lg" href="{% url 'main_web_portal:user_login'%}" role="button">Sign in</a>
-      <a class="btn btn-primary btn-lg" href="{% url 'main_web_portal:register'%}" role="button">Register</a>
-    </p>
+<div class="container">
+  <div class="landing_page">
+    <h1 class="display-4" align="center"><br></h1>
+    <h1 >Welcome to ETHCERT.IO</h1>
+    <a><img src="{% static 'ethcertLogoNew.png' %}" alt="" id="logo"></a>
+    <h2>We're a start-up focusing on Digitalizing Certificate Transactions using Ethereum Blockchain Technology</h2>
+    <p id = "summary">As financial institutions, educational institutions, corporate companies, businesses and governments continue their tedious work of tackling all forms of frauds, certificate frauds and forgery had become one of the prominent threats to organizational safety and development. With certificate verification process being usually compromised and unstandardized, organizational safety and development could potentially become an intricate and intimidating question.</p>
+    <h2>Sign up for our newsletter!</h2>
+    <form class="form" id = "form" action="" method="get">
+        <label for="first_name">First Name:</label><br>
+        <input class= "formInput"  type="text" name="" value="" required><br>
+        <br>
+        <label for="last_name">Last Name:</label><br>
+        <input class= "formInput" type="text" name="" value="" required><br>
+        <br>
+        <label for="email_id">Email:</label><br>
+        <input class= "formInput" type="email" name="" value="" required><br>
+        <input class= "sign_in_btn" type="submit" name="" value="Sign me up!">
+      </form>
   </div>
 </div>
-</div>
+
+
 {% endblock %}

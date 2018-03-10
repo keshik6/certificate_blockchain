@@ -1,9 +1,65 @@
-#navbar {
-height: 50px;
-background: #b7d84b;
-    position:fixed;
-    top:0px;
-    left:0px;
-    z-index:100;
-    right:0px;
+/*These are the css formatting for the navigation bar*/
+a{
+  font-size: 20px;
 }
+
+.navbar-nav a{
+  color: black !important;
+  font-family: 'Rammetto One', cursive;
+  font-family: 'Gloria Hallelujah', cursive;
+  font-family: 'Courgette', cursive;
+}
+
+.container-fluid{
+  background-color:#6b7a8f;
+}
+
+.navbar-brand{
+  color: white !important;
+  font-size: 25px !important;
+  font-family: 'Rammetto One', cursive;
+  font-family: 'Gloria Hallelujah', cursive;
+}
+/*End of css formatting for navigation bar*/
+
+
+/* The following are for the landing page*/
+.landing_page{
+  margin: auto;
+  background-color: #011627;
+  text-align: center;
+  color: white;
+  font-family: 'Fjalla One', sans-serif;
+  font-family: 'Bree Serif', serif;
+  border: 40px solid #29BF89;
+  border-top: 0px;
+  font-size: 15px
+}
+
+#logo{
+  border-radius: 20px;
+}
+
+#summary{
+  padding-top: 5%;
+  padding-left: 20%;
+  padding-right: 20%;
+}
+
+#form{
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+
+.formInput{
+  color: black !important;
+}
+
+.sign_in_btn{
+  font-size: 20px;
+  background-color:#FF9F1C;
+  border-radius: 25px;
+  margin: 10px;
+}
+/*End of css part for landing page */
