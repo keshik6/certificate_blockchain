@@ -11,7 +11,7 @@
           <h1>Register Here</h1>
           <h3>Fill the form</h3>
 
-        <form class= "form" enctype="multipart/form-data" method="POST" style="color: black;">
+        <form class= "form" enctype="multipart/form-data" method="POST">
           {% csrf_token %}
           {% for field in user_form %}
               <div class="fieldWrapper">
@@ -24,10 +24,8 @@
           {% endfor %}
           {% for field in profile_form %}
               <div class="fieldWrapper" align="center">
-                <div class="formInput">
                   {{ field.errors }}
                   {{ field.label_tag }} <br>{{ field }}
-                </div>
               </div>
               <br>
           {% endfor %}
