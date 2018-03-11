@@ -28,7 +28,7 @@ def register(request):
 
         # Get info from "both" forms
         # It appears as one form to the user on the .html page
-        user_form = UserForm(data=request.POST)
+        user_form = UserForm(data=request.POST,label_suffix='')
         profile_form = UserProfileInfoForm(data=request.POST)
 
         # Check to see both forms are valid

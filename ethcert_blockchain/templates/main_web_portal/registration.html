@@ -9,12 +9,25 @@
           <h1>Thank you for registering!</h1>
         {% else %}
           <h1>Register Here</h1>
-          <h3>Fill the form.</h3>
+          <h3>Fill the form</h3>
 
         <form class= "form" enctype="multipart/form-data" method="POST">
           {% csrf_token %}
-          {{ user_form.as_p }}
-          {{ profile_form.as_p }}
+          {% for field in user_form %}
+              <div class="fieldWrapper">
+                  {{ field.errors }}
+                  {{ field.label_tag }} <br> {{ field }}
+              </div>
+              <br>
+          {% endfor %}
+          {% for field in profile_form %}
+              <div class="fieldWrapper" align="center">
+                  {{ field.errors }}
+                  {{ field.label_tag }} <br>{{ field }}
+              </div>
+              <br>
+          {% endfor %}
+
         <input type="submit" name="" value="Register" class="sign_in_btn">
         </form>
 

@@ -31,10 +31,12 @@ a{
   color: white;
   font-family: 'Fjalla One', sans-serif;
   font-family: 'Bree Serif', serif;
-  border: 40px solid #29BF89;
+  border: 20px solid #447747;
   border-top: 0px;
-  font-size: 15px
+  font-size: 15px;
+  border-radius:20px;
 }
+
 
 #logo{
   border-radius: 20px;
