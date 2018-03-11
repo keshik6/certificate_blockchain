@@ -15,10 +15,11 @@
           {% csrf_token %}
           {% for field in user_form %}
               <div class="fieldWrapper">
-                <div class="formInput">
                   {{ field.errors }}
-                  {{ field.label_tag }} <br> {{ field }}
-                </div>
+                  {{ field.label_tag }} <br>
+                  <div class="formInput">
+                  {{ field }}
+                  </div>
               </div>
               <br>
           {% endfor %}

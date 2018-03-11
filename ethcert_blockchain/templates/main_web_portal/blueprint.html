@@ -45,14 +45,13 @@
       <!-- Anything inside of collapse navbar-collapse goes into the "hamburger" -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-                <li><a href="{% url 'main_web_portal:user_login'%}">Sign in<span class="sr-only">(current)</span></a></li>
-                <li><a href="{% url 'main_web_portal:register'%}">Register<span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Contact Us<span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Our Team<span class="sr-only">(current)</span></a></li>
-
 								{% if user.is_authenticated %}
+                  <li><a href="#">Our Team<span class="sr-only">(current)</span></a></li>
 									<li><a href="{% url 'main_web_portal:transaction'%}">Transaction<span class="sr-only">(current)</span></a></li>
 								{% else %}
+                  <li><a href="{% url 'main_web_portal:user_login'%}">Sign in<span class="sr-only">(current)</span></a></li>
+                  <li><a href="{% url 'main_web_portal:register'%}">Register<span class="sr-only">(current)</span></a></li>
+                  <li><a href="#">Our Team<span class="sr-only">(current)</span></a></li>
 								{% endif %}
           </ul>
 
