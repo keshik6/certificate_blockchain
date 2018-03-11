@@ -5,25 +5,29 @@
     <script src="{% static 'web3.min.js' %}"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 
+      <div class="container">
+        <div class="landing_page">
+          <h1 class="display-4" align="center"><br></h1>
+        	<h1>Issue Certificate</h1>
+          <h2></h2>
 
-    <div class="jumbotron">
-      	<h1>Issue Certificate</h1>
-        <h2 id="sender_details"></h2>
+  			<form class="form" accept-charset="utf-8">
+  				Sender Proof:<br>
+  				<input type="text" id = "sender_proof" name="senderproof" required class= "formInput"><br>
+          <br>
+          Receiver Address:<br>
+  				<input type="text" id = "receiver_addr" name="receiver_addr" required class= "formInput"><br>
+          <br>
+          Receiver Proof:<br>
+  				<input type="text" id = "receiver_proof" name="receiver_proof" required class= "formInput"><br>
+          <br>
+          Description:<br>
+  				<textarea name="descrip" id = "description" style="width:250px;height:150px;" placeholder="Enter certificate details" required class= "formInput"></textarea>
+
+        </form>
+        <br>
+        <button style="height:40px;width:100px" id = "submitBtn" value="Submit" class='sign_in_btn'>Issue</button>
     </div>
-
-		<div class="container">
-			<form accept-charset="utf-8">
-				Sender Proof:<br>
-				<input type="text" id = "sender_proof" name="senderproof" required><br>
-        Receiver Address:<br>
-				<input type="text" id = "receiver_addr" name="receiver_addr" required><br>
-        Receiver Proof:<br>
-				<input type="text" id = "receiver_proof" name="receiver_proof" required><br>
-        Description:<br>
-				<textarea name="descrip" id = "description" style="width:250px;height:150px;" placeholder="Enter certificate details" required></textarea>
-
-			</form>
-      <button id = "submitBtn" value="Submit"></button>
 		</div>
 
 
