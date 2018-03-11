@@ -1,0 +1,300 @@
+{% extends "main_web_portal/blueprint.html" %}
+{% load staticfiles %}
+
+{% block body_block %}
+    <script src="{% static 'web3.min.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+
+    <div class="jumbotron">
+      	<h1>Issue Certificate</h1>
+        <h2 id="sender_details"></h2>
+    </div>
+
+		<div class="container">
+			<form accept-charset="utf-8">
+				Sender Proof:<br>
+				<input type="text" id = "sender_proof" name="senderproof" required><br>
+        Receiver Address:<br>
+				<input type="text" id = "receiver_addr" name="receiver_addr" required><br>
+        Receiver Proof:<br>
+				<input type="text" id = "receiver_proof" name="receiver_proof" required><br>
+        Description:<br>
+				<textarea name="descrip" id = "description" style="width:250px;height:150px;" placeholder="Enter certificate details" required></textarea>
+
+			</form>
+      <button id = "submitBtn" value="Submit"></button>
+		</div>
+
+
+    <script>
+         accountDetected = false;
+         //Event listener for detecting Ethereum account using metamask chrome extension
+         window.addEventListener('load', function () {
+         // Checking if Web3 has been injected by the browser (Mist/MetaMask)
+         if (typeof web3 !== 'undefined') {
+         // Use Mist/MetaMask's provider
+           window.web3 = new Web3(web3.currentProvider);
+           if (web3.currentProvider.isMetaMask === true) {
+               if (typeof web3.eth.defaultAccount === 'undefined') {
+
+                 }
+               else {
+                   web3.eth.defaultAccount = web3.eth.accounts[0];
+                   web3.eth.getAccounts(console.log);
+                   $("#sender_details").html("Your Ethereum Account ID is " + web3.eth.defaultAccount);
+                   accountDetected = true;
+               }
+           }
+           else {
+
+               // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
+               window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+           }
+         };})
+
+
+         $("#submitBtn").click(function(){
+              if (accountDetected === true){
+                 var senderProof = $('#sender_proof').val();
+                 var recAddress = $('#receiver_addr').val();
+                 var recProof = $('#receiver_proof').val();
+                 var description = $('#description').val();
+                 var certificateFactoryContract = web3.eth.contract([{
+                          "constant": true,
+                          "inputs": [
+                            {
+                              "name": "",
+                              "type": "uint256"
+                            }
+                          ],
+                          "name": "certificates",
+                          "outputs": [
+                            {
+                              "name": "sender",
+                              "type": "address"
+                            },
+                            {
+                              "name": "senderProof",
+                              "type": "string"
+                            },
+                            {
+                              "name": "receiver",
+                              "type": "address"
+                            },
+                            {
+                              "name": "receiverProof",
+                              "type": "string"
+                            },
+                            {
+                              "name": "description",
+                              "type": "string"
+                            },
+                            {
+                              "name": "creationtime",
+                              "type": "uint256"
+                            }
+                          ],
+                          "payable": false,
+                          "stateMutability": "view",
+                          "type": "function"
+                        },
+                        {
+                          "constant": true,
+                          "inputs": [
+                            {
+                              "name": "",
+                              "type": "uint256"
+                            }
+                          ],
+                          "name": "certificateToSenderProof",
+                          "outputs": [
+                            {
+                              "name": "",
+                              "type": "string"
+                            }
+                          ],
+                          "payable": false,
+                          "stateMutability": "view",
+                          "type": "function"
+                        },
+                        {
+                          "constant": true,
+                          "inputs": [
+                            {
+                              "name": "",
+                              "type": "uint256"
+                            }
+                          ],
+                          "name": "certificateToSender",
+                          "outputs": [
+                            {
+                              "name": "",
+                              "type": "address"
+                            }
+                          ],
+                          "payable": false,
+                          "stateMutability": "view",
+                          "type": "function"
+                        },
+                        {
+                          "constant": true,
+                          "inputs": [
+                            {
+                              "name": "",
+                              "type": "uint256"
+                            }
+                          ],
+                          "name": "certificateToReceiverProof",
+                          "outputs": [
+                            {
+                              "name": "",
+                              "type": "string"
+                            }
+                          ],
+                          "payable": false,
+                          "stateMutability": "view",
+                          "type": "function"
+                        },
+                        {
+                          "constant": true,
+                          "inputs": [
+                            {
+                              "name": "",
+                              "type": "uint256"
+                            }
+                          ],
+                          "name": "certificateToReceiver",
+                          "outputs": [
+                            {
+                              "name": "",
+                              "type": "address"
+                            }
+                          ],
+                          "payable": false,
+                          "stateMutability": "view",
+                          "type": "function"
+                        },
+                        {
+                          "constant": true,
+                          "inputs": [
+                            {
+                              "name": "",
+                              "type": "uint256"
+                            }
+                          ],
+                          "name": "certificateToDescription",
+                          "outputs": [
+                            {
+                              "name": "",
+                              "type": "string"
+                            }
+                          ],
+                          "payable": false,
+                          "stateMutability": "view",
+                          "type": "function"
+                        },
+                        {
+                          "constant": true,
+                          "inputs": [
+                            {
+                              "name": "",
+                              "type": "uint256"
+                            }
+                          ],
+                          "name": "certificateToCreateTime",
+                          "outputs": [
+                            {
+                              "name": "",
+                              "type": "uint256"
+                            }
+                          ],
+                          "payable": false,
+                          "stateMutability": "view",
+                          "type": "function"
+                        },
+                        {
+                          "anonymous": false,
+                          "inputs": [
+                            {
+                              "indexed": false,
+                              "name": "certificateId",
+                              "type": "uint256"
+                            },
+                            {
+                              "indexed": false,
+                              "name": "sender",
+                              "type": "address"
+                            },
+                            {
+                              "indexed": false,
+                              "name": "senderProof",
+                              "type": "string"
+                            },
+                            {
+                              "indexed": false,
+                              "name": "receiver",
+                              "type": "address"
+                            },
+                            {
+                              "indexed": false,
+                              "name": "receiverProof",
+                              "type": "string"
+                            },
+                            {
+                              "indexed": false,
+                              "name": "description",
+                              "type": "string"
+                            },
+                            {
+                              "indexed": false,
+                              "name": "creationTime",
+                              "type": "uint256"
+                            }
+                          ],
+                          "name": "NewCertificate",
+                          "type": "event"
+                        },
+                        {
+                          "constant": false,
+                          "inputs": [
+                            {
+                              "name": "_senderProof",
+                              "type": "string"
+                            },
+                            {
+                              "name": "_receiver",
+                              "type": "address"
+                            },
+                            {
+                              "name": "_receiverProof",
+                              "type": "string"
+                            },
+                            {
+                              "name": "_description",
+                              "type": "string"
+                            }
+                          ],
+                          "name": "createCertificate",
+                          "outputs": [],
+                          "payable": false,
+                          "stateMutability": "nonpayable",
+                          "type": "function"
+                        }
+                       ])
+                 var certificateFactory = certificateFactoryContract.at("0x9953a35ec7b3da1c54880b4a3c401746a0f5cce8");
+                 certificateFactory.createCertificate(senderProof,recAddress,recProof,description,(err,res) => {
+                    if (err){
+                      alert("Error");
+                    }
+                    else{
+                      alert("Transaction created. Wait until the blocks are mined");
+                    }
+                 });
+              }
+         });
+
+       </script>
+
+
+{% endblock %}

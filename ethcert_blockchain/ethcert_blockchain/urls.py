@@ -18,8 +18,7 @@ from django.contrib import admin
 from main_web_portal import views
 
 urlpatterns = [
-    url(r'^$',views.index,name='index'),
+    url(r'^$',views.index, name="index"),
     url(r'^admin/', admin.site.urls),
     url(r'^main_web_portal/',include('main_web_portal.urls')),
-    url(r'^logout/$', views.user_logout, name='logout'),
 ]
