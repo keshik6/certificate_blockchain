@@ -103,6 +103,7 @@ def user_login(request):
                 # If account is not active:
                 return HttpResponse("Your account is not active.")
         else:
+            # This seems to be a vulnerability
             print("Someone tried to login and failed.")
             print("They used username: {} and password: {}".format(username,password))
             return HttpResponse("Invalid login details supplied.")
@@ -111,5 +112,6 @@ def user_login(request):
         #Nothing has been provided for username or password.
         return render(request, 'main_web_portal/login.html', {})
 
+@login_required
 def transaction(request):
     return render(request,"main_web_portal/transaction.html")
