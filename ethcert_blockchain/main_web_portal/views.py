@@ -113,5 +113,5 @@ def user_login(request):
         return render(request, 'main_web_portal/login.html', {})
 
 @login_required
-def transaction(request):
-    return render(request,"main_web_portal/transaction.html")
+def send_cert(request):
+    return render(request,"main_web_portal/send_cert.html")
