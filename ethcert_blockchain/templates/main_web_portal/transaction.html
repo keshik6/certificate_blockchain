@@ -9,9 +9,10 @@
         <div class="landing_page">
           <h1 class="display-4" align="center"><br></h1>
         	<h1>Send Certificate</h1>
-          <h2></h2>
+          <h2 id="sender_details">Detecting Ethereum Account using Metamask</h2>
 
-  			<form class="form" accept-charset="utf-8">
+
+  			<form class="form" id ="award_page" accept-charset="utf-8">
   				Sender Proof:<br>
   				<input type="text" id = "sender_proof" name="senderproof" required class= "formInput"><br>
           <br>
@@ -41,8 +42,8 @@
            window.web3 = new Web3(web3.currentProvider);
            if (web3.currentProvider.isMetaMask === true) {
                if (typeof web3.eth.defaultAccount === 'undefined') {
-
-                 }
+                  $("#sender_details").html("No Ethereum Account Detected. Make sure you are signed into Metamask" );
+               }
                else {
                    web3.eth.defaultAccount = web3.eth.accounts[0];
                    web3.eth.getAccounts(console.log);
@@ -292,7 +293,8 @@
                       alert("Error");
                     }
                     else{
-                      alert("Transaction created. Wait until the blocks are mined");
+                      document.getElementById("award_page").reset();
+                      alert("Transaction pending. Wait for the blocks to be mined");
                     }
                  });
               }

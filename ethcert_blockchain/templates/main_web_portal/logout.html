@@ -1,11 +1,9 @@
 {% extends 'main_web_portal/blueprint.html' %}
 {% block body_block %}
   <div class="container">
-    <div class="jumbotron">
+    <div class="landing_page">
+      <h1 class="display-4" align="center"><br></h1>
       <h1>You have successfully logged in</h1>
-        <p class="lead">
-        <a class="btn btn-primary btn-lg" href="{% url 'main_web_portal:user_logout'%}" role="button">Log out</a>
-        </p>
     </div>
   </div>
 {% endblock %}
