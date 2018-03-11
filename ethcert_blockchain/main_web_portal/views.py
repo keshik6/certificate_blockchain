@@ -112,5 +112,6 @@ def user_login(request):
         #Nothing has been provided for username or password.
         return render(request, 'main_web_portal/login.html', {})
 
+@login_required
 def transaction(request):
     return render(request,"main_web_portal/transaction.html")
