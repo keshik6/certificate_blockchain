@@ -1,25 +1,48 @@
 /*These are the css formatting for the navigation bar*/
-a{
-  font-size: 20px;
-}
+@import url('https://fonts.googleapis.com/css?family=Merriweather+Sans|Montserrat');
+
 
 .navbar-nav a{
-  color: black !important;
-  font-family: 'Rammetto One', cursive;
-  font-family: 'Gloria Hallelujah', cursive;
-  font-family: 'Courgette', cursive;
+  color: #4E4E4E !important;
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
 }
 
+.navbar-nav a:hover{
+  color: #FF3B3F !important;
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+
 .container-fluid{
-  background-color:#6b7a8f;
+  background-color:#EFEFEF;
 }
 
 .navbar-brand{
-  color: white !important;
-  font-size: 25px !important;
-  font-family: 'Rammetto One', cursive;
-  font-family: 'Gloria Hallelujah', cursive;
+  color: #4E4E4E !important;
+  font-size: 26px !important;
+  letter-spacing: 5px;
+  font-family: 'Montserrat', sans-serif !important;
 }
+
+.search-bar{
+  color:#4E4E4E !important;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+.search-btn{
+  color: #4E4E4E !important;
+  font-family: 'Montserrat', sans-serif !important;
+}
+
+.search-btn:hover{
+  color: #FF3B3F !important;
+  background-color: #FFDFDF !important;
+}
+
+
+
 /*End of css formatting for navigation bar*/
 
 
@@ -29,8 +52,8 @@ a{
   background-color: #011627;
   text-align: center;
   color: white;
-  font-family: 'Fjalla One', sans-serif;
-  font-family: 'Bree Serif', serif;
+  font-family: 'Montserrat', sans-serif;
+  font-family: 'Merriweather Sans', sans-serif;
   border: 20px solid #447747;
   border-top: 0px;
   font-size: 15px;
@@ -51,7 +74,7 @@ a{
 #form{
   font-size: 1.5em;
   margin-bottom: 10px;
-  font-family: 'Yanone Kaffeesatz', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .formInput{
@@ -61,7 +84,7 @@ a{
 .sign_in_btn{
   font-size: 20px;
   background-color:#FF9F1C;
-  border-radius: 25px;
-  margin: 10px;
+  /*border-radius: 25px;
+  margin: 10px;*/
 }
 /*End of css part for landing page */
