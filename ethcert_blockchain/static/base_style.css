@@ -57,6 +57,10 @@
   border-radius:10px;
 }
 
+html {
+  height: 100%;
+}
+
 body {
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#2fcbe2+0,77c9d4+100 */
   background: #2fcbe2; /* Old browsers */
@@ -92,4 +96,14 @@ body {
   /*border-radius: 25px;
   margin: 10px;*/
 }
+
+a:link {
+  color: #FF7F44;
+}
+
+a:hover {
+  color: #FF3B3F !important;
+}
+
+
 /*End of css part for landing page */
