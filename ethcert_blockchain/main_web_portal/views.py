@@ -119,3 +119,11 @@ def transaction(request):
 
 def team(request):
     return render(request,"main_web_portal/ourTeam.html")
+
+def view_cert(request):
+    if request.method == 'POST':
+        # handle empty fields in javascript
+        search_query = request.POST.get('searchtext')
+        print("clicked, searching {}".format(search_query))
+        return render(request, 'main_web_portal/viewCertificate.html', {"certID": search_query})
+

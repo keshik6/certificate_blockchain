@@ -11,4 +11,5 @@ urlpatterns=[
     url(r'^user_logout/$',views.user_logout,name='user_logout'),
     url(r'^transaction/$',views.transaction,name='transaction'),
     url(r'^team/$',views.team,name='team'),
+    url(r'^viewcert/$',views.view_cert,name='view_cert'),
 ]

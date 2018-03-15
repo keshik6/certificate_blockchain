@@ -1,0 +1,379 @@
+{% extends "main_web_portal/blueprint.html" %}
+{% load staticfiles %}
+
+{% block body_block %}
+    <script src="{% static 'web3.min.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+      <div class="container">
+        <div class="landing_page">
+          <h1 class="display-4" align="center"><br></h1>
+        	<h1>Certificate Details</h1>
+					<!-- for user accessibility should we have a web3 in the server instead? -->
+					<h2 id="detect">Awaiting Web3 Interface</h2>
+					<p> If you observer 0 values, the certificate might be non-existent</p>
+          <div class="table-responsive">
+					  <table class="table table-bordered">
+						  <tr>
+							  <th scope="row">Certificate ID</th>
+							  <td id="certID">{{ certID }}</td> 
+						  </tr>
+
+						  <tr>
+							  <th scope="row">Sender Address</th>
+							  <td id="senderAddress"></td>
+						  </tr>
+
+						  <tr>
+							  <th scope="row">Sender Proof</th>
+							  <td id="senderProof"></td>
+						  </tr>
+
+						  <tr>
+							  <th scope="row">Receiver Address</th>
+							  <td id="receiverAddress"></td>
+						  </tr>
+
+						  <tr>
+							  <th scope="row">Receiver Proof</th>
+							  <td id="receiverProof"></td>
+						  </tr>
+
+						  <tr>
+							  <th scope="row">Description</th>
+							  <td id="description"></td>
+						  </tr>
+
+						  <tr>
+							  <th scope="row">Creation Time</th>
+							  <td id="createTime"></td>
+						  </tr>
+					  </table>
+        </div>      
+			</div>
+		</div>
+
+
+    <script>
+			// get web3 instance
+			if(typeof web3 !== 'undefined'){
+				web3 = new Web3(web3.currentProvider);
+				$("#detect").html("Web3 interface connected");
+			} else {
+				// fallback	
+				web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+			}
+
+			// instantiate contract
+			var certificateFactoryContract = web3.eth.contract([{
+                          "constant": true,
+                          "inputs": [
+                            {
+                              "name": "",
+                              "type": "uint256"
+                            }
+                          ],
+                          "name": "certificates",
+                          "outputs": [
+                            {
+                              "name": "sender",
+                              "type": "address"
+                            },
+                            {
+                              "name": "senderProof",
+                              "type": "string"
+                            },
+                            {
+                              "name": "receiver",
+                              "type": "address"
+                            },
+                            {
+                              "name": "receiverProof",
+                              "type": "string"
+                            },
+                            {
+                              "name": "description",
+                              "type": "string"
+                            },
+                            {
+                              "name": "creationtime",
+                              "type": "uint256"
+                            }
+                          ],
+                          "payable": false,
+                          "stateMutability": "view",
+                          "type": "function"
+                        },
+                        {
+                          "constant": true,
+                          "inputs": [
+                            {
+                              "name": "",
+                              "type": "uint256"
+                            }
+                          ],
+                          "name": "certificateToSenderProof",
+                          "outputs": [
+                            {
+                              "name": "",
+                              "type": "string"
+                            }
+                          ],
+                          "payable": false,
+                          "stateMutability": "view",
+                          "type": "function"
+                        },
+                        {
+                          "constant": true,
+                          "inputs": [
+                            {
+                              "name": "",
+                              "type": "uint256"
+                            }
+                          ],
+                          "name": "certificateToSender",
+                          "outputs": [
+                            {
+                              "name": "",
+                              "type": "address"
+                            }
+                          ],
+                          "payable": false,
+                          "stateMutability": "view",
+                          "type": "function"
+                        },
+                        {
+                          "constant": true,
+                          "inputs": [
+                            {
+                              "name": "",
+                              "type": "uint256"
+                            }
+                          ],
+                          "name": "certificateToReceiverProof",
+                          "outputs": [
+                            {
+                              "name": "",
+                              "type": "string"
+                            }
+                          ],
+                          "payable": false,
+                          "stateMutability": "view",
+                          "type": "function"
+                        },
+                        {
+                          "constant": true,
+                          "inputs": [
+                            {
+                              "name": "",
+                              "type": "uint256"
+                            }
+                          ],
+                          "name": "certificateToReceiver",
+                          "outputs": [
+                            {
+                              "name": "",
+                              "type": "address"
+                            }
+                          ],
+                          "payable": false,
+                          "stateMutability": "view",
+                          "type": "function"
+                        },
+                        {
+                          "constant": true,
+                          "inputs": [
+                            {
+                              "name": "",
+                              "type": "uint256"
+                            }
+                          ],
+                          "name": "certificateToDescription",
+                          "outputs": [
+                            {
+                              "name": "",
+                              "type": "string"
+                            }
+                          ],
+                          "payable": false,
+                          "stateMutability": "view",
+                          "type": "function"
+                        },
+                        {
+                          "constant": true,
+                          "inputs": [
+                            {
+                              "name": "",
+                              "type": "uint256"
+                            }
+                          ],
+                          "name": "certificateToCreateTime",
+                          "outputs": [
+                            {
+                              "name": "",
+                              "type": "uint256"
+                            }
+                          ],
+                          "payable": false,
+                          "stateMutability": "view",
+                          "type": "function"
+                        },
+                        {
+                          "anonymous": false,
+                          "inputs": [
+                            {
+                              "indexed": false,
+                              "name": "certificateId",
+                              "type": "uint256"
+                            },
+                            {
+                              "indexed": false,
+                              "name": "sender",
+                              "type": "address"
+                            },
+                            {
+                              "indexed": false,
+                              "name": "senderProof",
+                              "type": "string"
+                            },
+                            {
+                              "indexed": false,
+                              "name": "receiver",
+                              "type": "address"
+                            },
+                            {
+                              "indexed": false,
+                              "name": "receiverProof",
+                              "type": "string"
+                            },
+                            {
+                              "indexed": false,
+                              "name": "description",
+                              "type": "string"
+                            },
+                            {
+                              "indexed": false,
+                              "name": "creationTime",
+                              "type": "uint256"
+                            }
+                          ],
+                          "name": "NewCertificate",
+                          "type": "event"
+                        },
+                        {
+                          "constant": false,
+                          "inputs": [
+                            {
+                              "name": "_senderProof",
+                              "type": "string"
+                            },
+                            {
+                              "name": "_receiver",
+                              "type": "address"
+                            },
+                            {
+                              "name": "_receiverProof",
+                              "type": "string"
+                            },
+                            {
+                              "name": "_description",
+                              "type": "string"
+                            }
+                          ],
+                          "name": "createCertificate",
+                          "outputs": [],
+                          "payable": false,
+                          "stateMutability": "nonpayable",
+                          "type": "function"
+                        }
+                       ]);
+
+			var certificateFactory = certificateFactoryContract.at("0x9953a35ec7b3da1c54880b4a3c401746a0f5cce8");
+			// script to double check value
+    	function checkValue(str) {
+				if(/^\+?(0|[1-9]\d*)$/.test(str)){
+					if(str >= 0){
+						return true;
+					}
+				} else {
+					return false;
+				}
+			}
+
+
+			var id = $('#certID').html();
+			if(!checkValue(id)){
+				alert("Invalid Input, Input a positive integer");
+			} else {
+
+				// sender address
+				certificateFactory.certificateToSender(id, function(error, result) {
+					if (error) {
+						console.log(error);
+						return;
+					} else {
+						var sendAdd = document.getElementById("senderAddress");
+						sendAdd.innerHTML = result;
+					}
+				});
+
+				// sender proof
+				certificateFactory.certificateToSenderProof(id, function(error, result) {
+					if (error) {
+						console.log(error);
+						return;
+					} else {
+						var sendPf = document.getElementById("senderProof");
+						sendPf.innerHTML = result;
+					}
+				});
+
+				// receiver address
+				certificateFactory.certificateToReceiver(id, function(error, result) {
+					if (error) {
+						console.log(error);
+						return;
+					} else {
+						var recAdd = document.getElementById("receiverAddress");
+						recAdd.innerHTML = result;
+					}
+				});
+
+				// receiver address
+				certificateFactory.certificateToReceiverProof(id, function(error, result) {
+					if (error) {
+						console.log(error);
+						return;
+					} else {
+						var recPf = document.getElementById("receiverProof");
+						recPf.innerHTML = result;
+					}
+				});
+				
+				// description 
+				certificateFactory.certificateToDescription(id, function(error, result) {
+					if (error) {
+						console.log(error);
+						return;
+					} else {
+						var desc = document.getElementById("description");
+						desc.innerHTML = result;
+					}
+				});
+
+				// description 
+				certificateFactory.certificateToCreateTime(id, function(error, result) {
+					if (error) {
+						console.log(error);
+						return;
+					} else {
+						var create = document.getElementById("createTime");
+						create.innerHTML = new Date(result * 1000);
+					}
+				});
+			}
+
+	  </script>
+
+
+{% endblock %}
