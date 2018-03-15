@@ -38,7 +38,6 @@
 
 .search-btn:hover{
   color: #FF3B3F !important;
-  background-color: #FFDFDF !important;
 }
 
 
@@ -49,17 +48,23 @@
 /* The following are for the landing page*/
 .landing_page{
   margin: auto;
-  background-color: #011627;
   text-align: center;
-  color: white;
-  font-family: 'Montserrat', sans-serif;
+  color: #F9F9F9;
+  background-color:#858585;
   font-family: 'Merriweather Sans', sans-serif;
-  border: 20px solid #447747;
-  border-top: 0px;
+  border-top: 2px;
   font-size: 15px;
-  border-radius:20px;
+  border-radius:10px;
 }
 
+body {
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#2fcbe2+0,77c9d4+100 */
+  background: #2fcbe2; /* Old browsers */
+  background: -moz-linear-gradient(top, #2fcbe2 0%, #77c9d4 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #2fcbe2 0%,#77c9d4 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #2fcbe2 0%,#77c9d4 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2fcbe2', endColorstr='#77c9d4',GradientType=0 ); /* IE6-9 */
+}
 
 #logo{
   border-radius: 20px;
