@@ -115,3 +115,7 @@ def user_login(request):
 @login_required
 def transaction(request):
     return render(request,"main_web_portal/transaction.html")
+
+
+def team(request):
+    return render(request,"main_web_portal/ourTeam.html")
