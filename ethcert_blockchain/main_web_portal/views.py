@@ -21,7 +21,7 @@ def user_logout(request):
 
 
 def register(request):
-
+    print("trying to register yo")
     registered = False
 
     if request.method == 'POST':
@@ -126,4 +126,3 @@ def view_cert(request):
         search_query = request.POST.get('searchtext')
         print("clicked, searching {}".format(search_query))
         return render(request, 'main_web_portal/viewCertificate.html', {"certID": search_query})
-

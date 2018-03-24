@@ -2,6 +2,7 @@
 {% load staticfiles %}
 
 {% block body_block %}
+    <link rel="stylesheet" href="{%static 'multi_step_register.css'%}">
     <script src="{% static 'web3.min.js' %}"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 
@@ -12,25 +13,25 @@
           <h2 id="sender_details">Detecting Ethereum Account using Metamask</h2>
 
 
-  			<form class="form" id ="award_page" accept-charset="utf-8">
-  				Sender Proof:<br>
-  				<input type="text" id = "sender_proof" name="senderproof" required class= "formInput"><br>
-          <br>
-          Receiver Address:<br>
-  				<input type="text" id = "receiver_addr" name="receiver_addr" required class= "formInput"><br>
-          <br>
-          Receiver Proof:<br>
-  				<input type="text" id = "receiver_proof" name="receiver_proof" required class= "formInput"><br>
-          <br>
-          Description:<br>
-  				<textarea name="descrip" id = "description" style="width:250px;height:150px;" placeholder="Enter certificate details" required class= "formInput"></textarea>
-
+  			<form id="msform" id ="award_page" accept-charset="utf-8">
+          <fieldset>
+            Sender Proof:<br>
+    				<input type="text" id = "sender_proof" name="senderproof" required class= "formInput"><br>
+            <br>
+            Receiver Address:<br>
+    				<input type="text" id = "receiver_addr" name="receiver_addr" required class= "formInput"><br>
+            <br>
+            Receiver Proof:<br>
+    				<input type="text" id = "receiver_proof" name="receiver_proof" required class= "formInput"><br>
+            <br>
+            Description:<br>
+    				<textarea name="descrip" id = "description" style="width:250px;height:150px;" placeholder="Enter certificate details" required class= "formInput"></textarea>
+            <button style="height:40px;width:100px" id = "submitBtn" value="Submit" class='next action-button'>Issue</button>
+          </fieldset>
         </form>
         <br>
-        <button style="height:40px;width:100px" id = "submitBtn" value="Submit" class='sign_in_btn'>Issue</button>
     </div>
 		</div>
-
 
     <script>
          accountDetected = false;

@@ -16,7 +16,7 @@
 					  <table class="table table-bordered">
 						  <tr>
 							  <th scope="row">Certificate ID</th>
-							  <td id="certID">{{ certID }}</td> 
+							  <td id="certID">{{ certID }}</td>
 						  </tr>
 
 						  <tr>
@@ -49,7 +49,7 @@
 							  <td id="createTime"></td>
 						  </tr>
 					  </table>
-        </div>      
+        </div>
 			</div>
 		</div>
 
@@ -60,7 +60,7 @@
 				web3 = new Web3(web3.currentProvider);
 				$("#detect").html("Web3 interface connected");
 			} else {
-				// fallback	
+				// fallback
 				web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 			}
 
@@ -349,8 +349,8 @@
 						recPf.innerHTML = result;
 					}
 				});
-				
-				// description 
+
+				// description
 				certificateFactory.certificateToDescription(id, function(error, result) {
 					if (error) {
 						console.log(error);
@@ -361,7 +361,7 @@
 					}
 				});
 
-				// description 
+				// description
 				certificateFactory.certificateToCreateTime(id, function(error, result) {
 					if (error) {
 						console.log(error);

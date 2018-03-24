@@ -2,6 +2,11 @@
 {% load staticfiles %}
 
 {% block body_block %}
+  <link rel="stylesheet" href="{%static 'multi_step_register.css'%}">
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js'></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
   <div class="container">
     <div class="landing_page">
       <h1 class="display-4" align="center"><br></h1>
@@ -10,29 +15,64 @@
         {% else %}
           <h1>Register Here</h1>
 
-        <form class= "form" enctype="multipart/form-data" method="POST">
-          {% csrf_token %}
-          {% for field in user_form %}
-              <div class="fieldWrapper">
-                  {{ field.errors }}
-                  {{ field.label_tag }} <br>
-                  <div class="formInput">
-                  {{ field }}
+        <form id="msform" enctype="multipart/form-data" method="POST" action="{% url 'main_web_portal:register' %}">
+          <ul id="progressbar">
+            <li class="active">Account Setup</li>
+            <li>Personal Details</li>
+            <li>Authentication</li>
+          </ul>
+
+          <fieldset>
+              {% csrf_token %}
+              <h2 class="fs-title">Create your account</h2>
+              {% for field in user_form %}
+                  <div class="fieldWrapper">
+                      <div class="formInput">
+                      {{ field }}
+                      </div>
                   </div>
-              </div>
-              <br>
-          {% endfor %}
-          {% for field in profile_form %}
-              <div class="fieldWrapper" align="center">
-                  {{ field.errors }}
-                  {{ field.label_tag }} <br>{{ field }}
-              </div>
-              <br>
-          {% endfor %}
+                  <br>
+              {% endfor %}
 
-        <input type="submit" name="" value="Register" class="sign_in_btn">
-        </form>
+              {% for field in profile_form %}
+                  <div class="fieldWrapper" align="center">
+                    {% if field.name == 'profile_pic' %}{{field.label}}<br>{{ field }}<br>{% endif %}
+                  </div>
+              {% endfor %}
+            <input type="button" name="next" class="next action-button" value="Next" />
+            <br>
+          </fieldset>
 
+          <fieldset>
+            {% csrf_token %}
+            <h2 class="fs-title">Authentication</h2>
+            <h3 class="fs-subtitle">Level 1</h3>
+            {% for field in profile_form %}
+                <div class="fieldWrapper" align="center" id="picLabel">
+                  {% if field.name == 'verification_code_lvl_1' %}{{ field }}<br>{% endif %}
+                  {% if field.name == 'address' %}{{ field }}<br>{% endif %}
+                  {% if field.name == 'url' %}{{ field }}<br>{% endif %}
+                </div>
+            {% endfor %}
+            <input type="button" name="next" class="next action-button" value="Next" />
+            <br>
+          </fieldset>
+
+          <fieldset>
+            {% csrf_token %}
+            <h2 class="fs-title">Complete ETHCERT registration</h2>
+            <h3 class="fs-subtitle">Authentication</h3>
+            {% for field in profile_form %}
+                <div class="fieldWrapper" align="center" id="picLabel">
+                  {% if field.name == 'verification_code_lvl_2' %}{{ field }}<br>{% endif %}
+                </div>
+            {% endfor %}
+            <input type="submit" name="submit" class="submit action-button" value="Submit" />
+          <br>
+          </fieldset>
+
+      </form>
+      <script src="{% static 'register_steps.js' %}"></script>
       {% endif %}
     </div>
   </div>

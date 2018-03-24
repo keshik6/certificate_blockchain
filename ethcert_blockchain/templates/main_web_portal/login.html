@@ -1,20 +1,21 @@
 {% extends 'main_web_portal/blueprint.html' %}
+{% load staticfiles %}
+
 {% block body_block %}
+  <link rel="stylesheet" href="{%static 'multi_step_register.css'%}">
   <div class="container">
     <div class="landing_page">
       <h1 class="display-4" align="center"><br></h1>
-      <h1>Enter your Login Credentials</h1>
-        <form class = "form" method="post" action="{% url 'main_web_portal:user_login' %}">
+        <form id="msform" method="post" action="{% url 'main_web_portal:user_login' %}">
           {% csrf_token %}
-          {# A more "HTML" way of creating the login form#}
-          <label for="username">Username:</label><br>
-          <input class= "formInput" type="text" name="username" placeholder="Username"><br>
-          <br>
-          <label for="password">Password:</label><br>
-          <input class= "formInput" type="password" name="password" placeholder="Password"><br>
-          <br>
-          <input type="submit" name="" value="Login" class="sign_in_btn">
-
+          <fieldset>
+            <h2 class="fs-title">Enter your Login Credentials</h2>
+            <input class= "formInput" type="text" name="username" placeholder="Username"><br>
+            <br>
+            <input class= "formInput" type="password" name="password" placeholder="Password"><br>
+            <br>
+            <input type="submit" name="" value="Login" class="submit action-button">
+          </fieldset>
         </form>
     </div>
   </div>

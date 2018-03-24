@@ -3,25 +3,23 @@
 {% block body_block %}
 
 <div class="container">
+  <link rel="stylesheet" href="{%static 'multi_step_register.css'%}">
   <div class="landing_page">
     <h1 class="display-4" align="center"><br></h1>
     <h1 >Welcome to ETHCERT.IO</h1>
     <a><img src="{% static 'ethcertLogoNew.png' %}" alt="" id="logo"></a>
     <h2>We're a start-up focusing on Digitalizing Certificate <br> Transactions using Ethereum Blockchain Technology</h2>
     <p id = "summary">As financial institutions, educational institutions, corporate companies, businesses and governments continue their tedious work of tackling all forms of frauds, certificate frauds and forgery had become one of the prominent threats to organizational safety and development. With certificate verification process being usually compromised and unstandardized, organizational safety and development could potentially become an intricate and intimidating question.</p>
-    <h2>Sign up for our newsletter!</h2>
-    <form class="form" id = "form" action="" method="get">
-        <label for="first_name">First Name:</label><br>
-        <input class= "formInput"  type="text" name="" value="" required><br>
+    <form id = "msform" action="" method="get">
+      <fieldset>
+        <h2 class="fs-title">Sign up for our newsletter!</h2>
+        <input class= "formInput"  type="text" name="" value="" required placeholder="First Name"><br>
+        <input class= "formInput" type="text" name="" value="" required placeholder="Last Name"><br>
+        <input class= "formInput" type="email" name="" value="" required placeholder="Email"><br>
         <br>
-        <label for="last_name">Last Name:</label><br>
-        <input class= "formInput" type="text" name="" value="" required><br>
-        <br>
-        <label for="email_id">Email:</label><br>
-        <input class= "formInput" type="email" name="" value="" required><br>
-        <br>
-        <input class= "sign_in_btn" type="submit" name="" value="Sign me up!">
-      </form>
+        <input type="submit" class="submit action-button" value="Sign up">
+      </fieldset>
+    </form>
   </div>
 </div>
 
