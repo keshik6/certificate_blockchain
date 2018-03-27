@@ -2,6 +2,23 @@
 {% load staticfiles %}
 {% block body_block %}
 
+<link href="https://fonts.googleapis.com/css?family=Palanquin+Dark" rel="stylesheet">
+
+<div class="bgimg" align="center">
+  <br><br><br>
+  <h1 id="lab"><span class="label label-default">Tired of Centralized Applications</span></h1>
+  <button  type="button" id = "bt" class="btn-lg btn-success center-block" >GET STARTED</button>
+  <script type="text/javascript">
+  document.getElementById("bt").addEventListener("click", moveDown);
+  function moveDown(){
+    $("html, body").animate({
+      scrollTop: 600
+      });
+  }
+
+  </script>
+</div>
+
 <div class="container">
   <link rel="stylesheet" href="{%static 'multi_step_register.css'%}">
   <div class="landing_page">

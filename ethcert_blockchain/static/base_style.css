@@ -1,6 +1,7 @@
 /*These are the css formatting for the navigation bar*/
 @import url('https://fonts.googleapis.com/css?family=Merriweather+Sans|Montserrat');
-
+@import url('/static/abstract-art.jpg');
+@import url('https://fonts.googleapis.com/css?family=Palanquin+Dark');
 
 .navbar-nav a{
   color: #4E4E4E !important;
@@ -66,7 +67,7 @@ body {
   background: #2fcbe2; /* Old browsers */
   background: -moz-linear-gradient(top, #2fcbe2 0%, #77c9d4 100%); /* FF3.6-15 */
   background: -webkit-linear-gradient(top, #2fcbe2 0%,#77c9d4 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom, #2fcbe2 0%,#77c9d4 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  background: linear-gradient(to bottom, #bca0a0 0%,#77c9d4 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2fcbe2', endColorstr='#77c9d4',GradientType=0 ); /* IE6-9 */
 }
 
@@ -105,5 +106,29 @@ a:hover {
   color: #FF3B3F !important;
 }
 
+.bgimg {
+    background: url('/static/blur-blurry.jpg');
+    background-repeat:no-repeat;
+    background-size:cover;
+    height:800px;width:100%;
+    opacity: 0.97;
+    align-items: center;
+    display: block;
+}
 
-/*End of css part for landing page */
+.bgimg:hover{
+  opacity: 1.0;
+}
+
+#bt{
+  transform: translateY(100%);
+  background-color: #397f3b;
+}
+
+#lab{
+  margin-top: 214px;
+  text-align: center;
+  color: white;
+  font-family: 'Palanquin Dark', sans-serif;
+  font-size: 50px;
+}
