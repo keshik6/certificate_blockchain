@@ -41,7 +41,9 @@
   color: #FF3B3F !important;
 }
 
-
+.icon-bar {
+    background-color: black;
+}
 /*End of css formatting for navigation bar*/
 
 
