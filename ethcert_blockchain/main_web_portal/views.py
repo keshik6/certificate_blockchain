@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 
 # Create your views here.
@@ -105,8 +106,9 @@ def user_login(request):
         else:
             # This seems to be a vulnerability
             print("Someone tried to login and failed.")
-            print("They used username: {} and password: {}".format(username,password))
-            return HttpResponse("Invalid login details supplied.")
+            #print("They used username: {} and password: {}".format(username,password))
+            messages.error(request,'Username or Password not correct')
+            return render(request, 'main_web_portal/login.html', {})
 
     else:
         #Nothing has been provided for username or password.

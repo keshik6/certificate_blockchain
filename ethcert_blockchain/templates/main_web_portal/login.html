@@ -16,5 +16,12 @@
           <input type="submit" name="" value="Login" class="submit action-button">
         </fieldset>
       </form>
+
+      {% for message in messages %}
+            <div class="alert alert-danger">
+                <a class="close" href="#" data-dismiss="alert">×</a>
+                {{ message }}
+            </div>
+      {% endfor %}
   </div>
 {% endblock %}
