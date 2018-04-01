@@ -2,6 +2,7 @@
 {% load staticfiles %}
 
 {% block body_block %}
+		<link rel="stylesheet" href="{% static 'viewcert.css' %}">
     <script src="{% static 'web3.min.js' %}"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 
@@ -50,6 +51,12 @@
 						  </tr>
 					  </table>
         </div>
+
+				<form id="decrypt-data" accept-charset="utf-8">
+					<input type="text" id="decryptkey" placeholder="Enter Decryption Key" required/>		
+					<br>
+					<button id="decryptBtn" onclick="return decrypt()">Decrypt</button>
+				</form>
 			</div>
 		</div>
 
@@ -374,6 +381,27 @@
 			}
 
 	  </script>
+
+		<!-- code to decrypt -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+		<script>
+			function decrypt() {
+				var key = $("#decryptkey").val();
+				var sendpf = document.getElementById("senderProof").innerHTML;
+				var recpf = document.getElementById("receiverProof").innerHTML;
+				var desc = document.getElementById("description").innerHTML;
+
+				var sendpf_dec = CryptoJS.AES.decrypt(sendpf, key).toString(CryptoJS.enc.Utf8);
+				var recpf_dec = CryptoJS.AES.decrypt(recpf, key).toString(CryptoJS.enc.Utf8);
+				var desc_dec = CryptoJS.AES.decrypt(desc, key).toString(CryptoJS.enc.Utf8);
+				
+				document.getElementById("senderProof").innerHTML = sendpf_dec;
+				document.getElementById("receiverProof").innerHTML = recpf_dec;
+				document.getElementById("description").innerHTML = desc_dec;
+				
+				return false;
+			}	
+		</script>
 
 
 {% endblock %}

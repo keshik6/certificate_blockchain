@@ -1,3 +1,5 @@
+ @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono');
+
 /* Background For Modal Window */
 .modal {
   display: none;    /* hidden by default*/
@@ -80,6 +82,14 @@
 #confirmEncryptBtn:hover, #confirmEncryptBtn:focus {
 	box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60
 }
+
+#key {
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+
 
 
 
