@@ -9,47 +9,47 @@
       <div class="container">
         <div class="landing_page">
           <h1 class="display-4" align="center"><br></h1>
-        	<h1>Certificate Details</h1>
+					<h1>Certificate Details</h1>
 					<!-- for user accessibility should we have a web3 in the server instead? -->
 					<h2 id="detect">Awaiting Web3 Interface</h2>
 					<p> If you observe 0 values, the certificate might be non-existent</p>
           <div class="table-responsive">
-					  <table class="table table-bordered">
-						  <tr>
-							  <th scope="row">Certificate ID</th>
-							  <td id="certID">{{ certID }}</td>
-						  </tr>
+						<table class="table table-bordered">
+							<tr>
+								<th scope="row">Certificate ID</th>
+								<td id="certID">{{ certID }}</td>
+							</tr>
 
-						  <tr>
-							  <th scope="row">Sender Address</th>
-							  <td id="senderAddress"></td>
-						  </tr>
+							<tr>
+								<th scope="row">Sender Address</th>
+								<td id="senderAddress"></td>
+							</tr>
 
-						  <tr>
-							  <th scope="row">Sender Proof</th>
-							  <td id="senderProof"></td>
-						  </tr>
+							<tr>
+								<th scope="row">Sender Proof</th>
+								<td id="senderProof"></td>
+							</tr>
 
-						  <tr>
-							  <th scope="row">Receiver Address</th>
-							  <td id="receiverAddress"></td>
-						  </tr>
+							<tr>
+								<th scope="row">Receiver Address</th>
+								<td id="receiverAddress"></td>
+							</tr>
 
-						  <tr>
-							  <th scope="row">Receiver Proof</th>
-							  <td id="receiverProof"></td>
-						  </tr>
+							<tr>
+								<th scope="row">Receiver Proof</th>
+								<td id="receiverProof"></td>
+							</tr>
 
-						  <tr>
-							  <th scope="row">Description</th>
-							  <td id="description"></td>
-						  </tr>
+							<tr>
+								<th scope="row">Description</th>
+								<td id="description"></td>
+							</tr>
 
-						  <tr>
-							  <th scope="row">Creation Time</th>
-							  <td id="createTime"></td>
-						  </tr>
-					  </table>
+							<tr>
+								<th scope="row">Creation Time</th>
+								<td id="createTime"></td>
+							</tr>
+						</table>
         </div>
 
 				<form id="decrypt-data" accept-charset="utf-8">
@@ -297,7 +297,7 @@
 
 			var certificateFactory = certificateFactoryContract.at("0x9953a35ec7b3da1c54880b4a3c401746a0f5cce8");
 			// script to double check value
-    	function checkValue(str) {
+			function checkValue(str) {
 				if(/^\+?(0|[1-9]\d*)$/.test(str)){
 					if(str >= 0){
 						return true;
@@ -380,7 +380,7 @@
 				});
 			}
 
-	  </script>
+		</script>
 
 		<!-- code to decrypt -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
