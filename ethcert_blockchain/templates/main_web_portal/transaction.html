@@ -3,6 +3,7 @@
 
 {% block body_block %}
     <link rel="stylesheet" href="{%static 'multi_step_register.css'%}">
+		<link rel="stylesheet" href="{%static 'modal.css'%}">
     <script src="{% static 'web3.min.js' %}"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
       <div class="container">
@@ -11,23 +12,63 @@
           <h2 id="sender_details">Detecting Ethereum Account using Metamask</h2>
   			<form id="msform" id ="award_page" accept-charset="utf-8">
           <fieldset>
-            Sender Proof:<br>
-    				<input type="text" id = "sender_proof" name="senderproof" required class= "formInput"><br>
+            Sender Proof:
+						<br>
+    				<input type="text" id ="sender_proof" name="senderproof" required class= "formInput"><br>
             <br>
-            Receiver Address:<br>
-    				<input type="text" id = "receiver_addr" name="receiver_addr" required class= "formInput"><br>
+            Receiver Address:
+						<br>
+    				<input type="text" id ="receiver_addr" name="receiver_addr" required class= "formInput"><br>
             <br>
-            Receiver Proof:<br>
-    				<input type="text" id = "receiver_proof" name="receiver_proof" required class= "formInput"><br>
+            Receiver Proof:
+						<br>
+    				<input type="text" id ="receiver_proof" name="receiver_proof" required class= "formInput"><br>
             <br>
-            Description:<br>
+            Description:
+						<br>
     				<textarea name="descrip" id = "description" style="width:250px;height:150px;" placeholder="Enter certificate details" required class= "formInput"></textarea>
-            <button style="height:40px;width:100px" id = "submitBtn" value="Submit" class='next action-button'>Issue</button>
+						<br>
+						<button id="encryptBtn" class="encrypt-button" onclick="return openModal()">Encrypt</button>
+            <button id ="submitBtn" value="Submit" class="next action-button">Issue</button>
           </fieldset>
         </form>
+				<div>
         <br>
 		</div>
 
+		<!-- modal view for encrypt function -->
+		<div id="modal-window" class="modal">
+			<div class="modal-content">
+				<div class="modal-header">
+					<span class="close" onclick="closeModal()">&times;</span>
+					<h3>Confirm Encrypt</h3>
+				</div>
+
+				<div class="modal-body">
+					<p>Confirm that you want to encrypt information.</p>
+					<p>Sender Proof, Receiver Proof, and Description will be encrypted once confirmed.</p>
+					<button id="confirmEncryptBtn" class="confirm-encrypt-button" onclick="return encryptModal()">Confirm</button> 
+				</div>
+			</div>
+		</div>
+		
+		<div id="modal-window-post" class="modal">
+			<div class="modal-content">
+				<div class="modal-header">
+					<span class="close" onclick="closeModal()">&times;</span>
+					<h3>Encrypted!</h3>
+				</div>
+
+				<div class="modal-body">
+					<p>Sender Proof, Receiver Proof, and Description is now encrypted.</p>
+					<p>Please save the key below securely</p>
+					<p id="key" style="font-weight: bold; font-size:20px;">null</p>
+					<button id="confirmEncryptBtn" class="confirm-encrypt-button" onclick="closeModal()">Finish</button> 
+				</div>
+			</div>
+		</div>
+
+		<!-- script for eth -->
     <script>
          accountDetected = false;
          //Event listener for detecting Ethereum account using metamask chrome extension
@@ -46,13 +87,12 @@
                    $("#sender_details").html("Your Ethereum Account ID is " + web3.eth.defaultAccount);
                    accountDetected = true;
                }
-           }
-           else {
-
+           } else {
                // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
                window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
            }
-         };})
+				 }
+			 });
 
 
          $("#submitBtn").click(function(){
@@ -282,7 +322,7 @@
                           "stateMutability": "nonpayable",
                           "type": "function"
                         }
-                       ])
+                       ]);
                  var certificateFactory = certificateFactoryContract.at("0x9953a35ec7b3da1c54880b4a3c401746a0f5cce8");
                  certificateFactory.createCertificate(senderProof,recAddress,recProof,description,(err,res) => {
                     if (err){
@@ -296,7 +336,60 @@
               }
          });
 
-       </script>
+    </script>
+
+		<!-- script for encryption to check if crypto js is still ok to use -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+		<script>
+			function openModal() {
+				var senderProof_e = $('#sender_proof').val();
+				var recProof_e = $('#receiver_proof').val();
+				var description_e = $('#description').val();
+
+				if(senderProof_e == null || senderProof_e == "", recProof_e == null || recProof_e == "", description_e == null || description_e == ""){
+					alert("Please fill all required fields");
+				} else {
+					document.getElementById("modal-window").style.display = "block";
+				}
+				return false;
+			}
+
+			function encryptModal() {
+				document.getElementById("modal-window").style.display = "none";
+				document.getElementById("modal-window-post").style.display = "block";
+
+				var senderProof_e = $('#sender_proof').val();
+				var recProof_e = $('#receiver_proof').val();
+				var description_e = $('#description').val();
+
+				// generate random string
+				let length = 40;
+        let charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+				var randomStr = "";
+
+				for(var i = 0, n = charset.length; i < length; ++i){
+					randomStr += charset.charAt(Math.floor(Math.random() * n));
+				}
+
+				document.getElementById("key").innerHTML = randomStr;
+
+				// encrypt
+				var senderProofEncrypted = CryptoJS.AES.encrypt(senderProof_e, randomStr).toString();
+				var recProofEncrypted = CryptoJS.AES.encrypt(recProof_e, randomStr).toString();
+				var descEncrypted = CryptoJS.AES.encrypt(description_e, randomStr).toString();
+
+				$('#sender_proof').val(senderProofEncrypted);
+				$('#receiver_proof').val(recProofEncrypted);
+				$('#description').val(descEncrypted);
+
+				return false;
+			}
+
+			function closeModal() {
+				document.getElementById("modal-window").style.display = "none";
+				document.getElementById("modal-window-post").style.display = "none";
+			}
+		</script>
 
 
 {% endblock %}
