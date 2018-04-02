@@ -1,0 +1,22 @@
+{% extends "main_web_portal/blueprint.html" %}
+{% load staticfiles %}
+
+{% block body_block %}
+<h1 class="display-4" align="center"><br></h1>
+<link rel="stylesheet/less" type="text/css" href="{% static 'dashboard-style.less' %}" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.0.0/less.min.js" ></script>
+<script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+<div class="wrapper">
+  <section id="sideBar">
+    <nav>
+      <a href="#" class="active"><i id="dbIcon" class="fas fa-home"></i>Dashboard</a>
+      <a href="#"><i id="dbIcon" class="fas fa-user"></i>Profile</a>
+      <a href="#"><i id="dbIcon" class="fab fa-ethereum"></i>Ethereum Account</a>
+      <a href="#"><i id="dbIcon" class="fab fa-bandcamp"></i>Other</a>
+    </nav>
+
+  </section>
+
+</div>
+
+{% endblock %}
