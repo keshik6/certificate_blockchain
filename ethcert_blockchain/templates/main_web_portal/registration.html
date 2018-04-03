@@ -9,18 +9,18 @@
   <link rel="stylesheet" href="{%static 'multi_step_register.css'%}">
   <div class="container">
       <h1 class="display-4" align="center"><br></h1>
-        {% if registered %}
-          <h1>Thank you for registering!</h1>
-        {% else %}
-          <h1>Register Here</h1>
+      {% if registered %}
+      <div class="jumbotron jumbotron-fluid">
+        <h1 class="display-4">Thank you for Registering {{username}}!</h1>
+        <p class="lead">Verification code is sent to {{email}}. Login to ETHCERT to continue</p>
+        <hr class="my-4">
+        <p class="lead">
+          <a class="btn btn-primary btn-lg" href="{% url 'main_web_portal:user_login' %}" role="button">Login</a>
+        </p>
+      </div>
 
+      {% else %}
         <form id="msform" enctype="multipart/form-data" method="POST" action="{% url 'main_web_portal:register' %}">
-          <ul id="progressbar">
-            <li class="active">Account Setup</li>
-            <li>Personal Details</li>
-            <li>Authentication</li>
-          </ul>
-
           <fieldset>
               {% csrf_token %}
               <h2 class="fs-title">Create your account</h2>
@@ -33,45 +33,10 @@
                   <br>
               {% endfor %}
 
-              {% for field in profile_form %}
-                  <div class="fieldWrapper" align="center">
-                    {% if field.name == 'profile_pic' %}{{field.label}}<br>{{ field }}<br>{% endif %}
-                  </div>
-              {% endfor %}
-            <input type="button" name="next" class="next action-button" value="Next" />
-            <br>
-          </fieldset>
-
-          <fieldset>
-            {% csrf_token %}
-            <h2 class="fs-title">Authentication</h2>
-            <h3 class="fs-subtitle">Level 1</h3>
-            {% for field in profile_form %}
-                <div class="fieldWrapper" align="center" id="picLabel">
-                  {% if field.name == 'verification_code_lvl_1' %}{{ field }}<br>{% endif %}
-                  {% if field.name == 'address' %}{{ field }}<br>{% endif %}
-                  {% if field.name == 'url' %}{{ field }}<br>{% endif %}
-                </div>
-            {% endfor %}
-            <input type="button" name="next" class="next action-button" value="Next" />
-            <br>
-          </fieldset>
-
-          <fieldset>
-            {% csrf_token %}
-            <h2 class="fs-title">Complete ETHCERT registration</h2>
-            <h3 class="fs-subtitle">Authentication</h3>
-            {% for field in profile_form %}
-                <div class="fieldWrapper" align="center" id="picLabel">
-                  {% if field.name == 'verification_code_lvl_2' %}{{ field }}<br>{% endif %}
-                </div>
-            {% endfor %}
             <input type="submit" name="submit" class="submit action-button" value="Submit" />
-          <br>
+            <br>
           </fieldset>
-
-      </form>
-      <script src="{% static 'register_steps.js' %}"></script>
+        </form>
       {% endif %}
   </div>
 

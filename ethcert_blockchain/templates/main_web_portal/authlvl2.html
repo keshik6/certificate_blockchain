@@ -1,0 +1,18 @@
+{% extends "main_web_portal/blueprint.html" %}
+{% load staticfiles %}
+
+{% block body_block %}
+<form id="msform" enctype="multipart/form-data" method="POST" action="{% url 'main_web_portal:register' %}">
+  <fieldset>
+    {% csrf_token %}
+    <h2 class="fs-title">Complete ETHCERT registration</h2>
+    <h3 class="fs-subtitle">Authentication</h3>
+    {% for field in profile_form %}
+        <div class="fieldWrapper" align="center" id="picLabel">
+          {% if field.name == 'verification_code_lvl_2' %}{{ field }}<br>{% endif %}
+        </div>
+    {% endfor %}
+    <input type="submit" name="submit" class="submit action-button" value="Submit" />
+  <br>
+  </fieldset>
+</form>
