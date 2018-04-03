@@ -19,7 +19,7 @@ import os
 SECRET_KEY = 'uffv@19=t!l$cnyp)i97n_prnth*+7etqa^7k^!&s$*tj$uksd'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0']
 
