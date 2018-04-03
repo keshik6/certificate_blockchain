@@ -12,6 +12,9 @@
 					<h1>Certificate Details</h1>
 					<!-- for user accessibility should we have a web3 in the server instead? -->
 					<h2 id="detect">Awaiting Web3 Interface</h2>
+					<div id="alert" class="alert alert-danger" style="display: none;">
+						<p>Certificate does not exist</p>
+					</div>
 					<p> If you observe 0 values, the certificate might be non-existent</p>
           <div class="table-responsive">
 						<table class="table table-bordered">
@@ -376,6 +379,12 @@
 					} else {
 						var create = document.getElementById("createTime");
 						create.innerHTML = new Date(result * 1000);
+						// if create time is 0 we can assume that the certificate does not exist
+						if(result == 0){
+							document.getElementById("alert").style.display = "block";
+						} else {
+							document.getElementById("alert").style.display = "none";
+						}
 					}
 				});
 			}
@@ -402,6 +411,7 @@
 				return false;
 			}	
 		</script>
+
 
 
 {% endblock %}
