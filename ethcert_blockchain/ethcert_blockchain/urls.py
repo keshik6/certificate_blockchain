@@ -13,12 +13,18 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url,include
+from django.conf.urls import url, include, handler404, handler500
+from django.conf import settings
 from django.contrib import admin
 from main_web_portal import views
+
+# error views
+handler404 = 'main_web_portal.views.handler404'
+handler500 = 'main_web_portal.views.handler500'
 
 urlpatterns = [
     url(r'^$',views.index, name="index"),
     url(r'^admin/', admin.site.urls),
     url(r'^main_web_portal/',include('main_web_portal.urls')),
-]
+    ]
+

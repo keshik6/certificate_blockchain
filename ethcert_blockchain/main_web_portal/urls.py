@@ -1,5 +1,6 @@
-from django.conf.urls import url
 from main_web_portal import views
+from django.conf.urls import include, url
+
 
 # SET THE NAMESPACE!
 app_name = 'main_web_portal'

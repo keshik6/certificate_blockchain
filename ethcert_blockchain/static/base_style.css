@@ -134,3 +134,16 @@ a:hover {
   font-family: 'Palanquin Dark', sans-serif;
   font-size: 50px;
 }
+
+.flexbox-centering {
+  display: -webkit-flexbox;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  justify-content: center;
+}
+
