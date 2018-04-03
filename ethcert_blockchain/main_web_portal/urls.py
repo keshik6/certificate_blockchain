@@ -12,4 +12,5 @@ urlpatterns=[
     url(r'^transaction/$',views.transaction,name='transaction'),
     url(r'^team/$',views.team,name='team'),
     url(r'^viewcert/$',views.view_cert,name='view_cert'),
+    url(r'^dashboard/$',views.dashboard,name='dashboard'),
 ]
