@@ -30,10 +30,16 @@ class UserProfile(models.Model):
         return self.user.username
 
     def getVerificationCode1(self):
-        return 1;
+        return self.verification_code_lvl_1;
+
+    def setVerificationCode1(self, code):
+        self.verification_code_lvl_1 = code;
 
     def getVerificationCode2(self):
         return self.verification_code_lvl_2
+
+    def setVerificationCode2(self, code):
+        self.verification_code_lvl_2 = code;
 
     def getAddress(self):
         return self.address

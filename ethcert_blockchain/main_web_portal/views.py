@@ -9,6 +9,8 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 from django.shortcuts import render, render_to_response
 from django.template import RequestContext
+from faker import Faker
+from main_web_portal.models import UserProfile
 
 
 # Create your views here.
@@ -50,11 +52,11 @@ def register(request):
             # Now we deal with the extra info!
 
             # Can't commit yet because we still need to manipulate
-            #profile = profile_form.save(commit=False)
+            profile = UserProfile()
 
             # Set One to One relationship between
             # UserForm and UserProfileInfoForm
-            #profile.user = user
+            profile.user = user
 
             # Check if they provided a profile picture
             # if 'profile_pic' in request.FILES:
@@ -63,22 +65,27 @@ def register(request):
             #     profile.profile_pic = request.FILES['profile_pic']
 
             # Now save model
-            #profile.save()
+            profile.save()
 
-            # print("Profile auth code 1 is : " + \
-            #       str(profile.getVerificationCode1()));
+            fakeGenerator = Faker()
+            vercode1 = fakeGenerator.bban()
+            print("Profile auth code 1 is : " + vercode1)
 
+            profile.setVerificationCode1(vercode1)
             print('Successfully registered')
+            print("get profiles verification code " + profile.getVerificationCode1())
+
             # Registration Successful!
             registered = True
 
             email = EmailMessage(
                             'ETHCERT Verification Code',
-                            'Hi ' + str(user.username) + 'Your verification code is 1234',
-                            'sender smtp gmail' +'<sender@gmail.com>',
-                            [user.email],
-                            headers = {'Reply-To': 'contact_email@gmail.com' }
+                            'Hi ' + str(profile.user.username) + ',\nThank you for registering.\nYour verification code is ' +
+                            str(vercode1) + "\nLogin to ETHCERT Dashboard to continue.\n\nBest Regards,\nETHCERT Team",
+                            'ETHCERT TEAM' +'<sender@gmail.com>',
+                            [profile.user.email],
                         )
+
             email.send()
             return render(request,'main_web_portal/registration.html',
                                   {'username':user.username, 'email':user.email,
