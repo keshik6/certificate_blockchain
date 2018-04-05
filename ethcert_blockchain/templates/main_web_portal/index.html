@@ -13,32 +13,32 @@
   document.getElementById("bt").addEventListener("click", moveDown);
   function moveDown(){
     $("html, body").animate({
-      scrollTop: 600
+      scrollTop: 400
       });
   }
-
   </script>
-</div>
 
-<div class="container">
-  <div class="landing_page">
-    <link rel="stylesheet" href="{%static 'multi_step_register.css'%}">
-    <h1 class="display-4" align="center"><br></h1>
-    <h1 >Welcome to ETHCERT.IO</h1>
-    <a><img src="{% static 'ethcertLogoNew.png' %}" alt="" id="logo"></a>
-    <h2>We're a start-up focusing on Digitalizing Certificate <br> Transactions using Ethereum Blockchain Technology</h2>
-    <p id = "summary">As financial institutions, educational institutions, corporate companies, businesses and governments continue their tedious work of tackling all forms of frauds, certificate frauds and forgery had become one of the prominent threats to organizational safety and development. With certificate verification process being usually compromised and unstandardized, organizational safety and development could potentially become an intricate and intimidating question.</p>
-    <form id = "msform" action="" method="get">
-      <fieldset>
-        <h2 class="fs-title">Sign up for our newsletter!</h2>
-        <input class= "formInput"  type="text" name="" value="" required placeholder="First Name"><br>
-        <input class= "formInput" type="text" name="" value="" required placeholder="Last Name"><br>
-        <input class= "formInput" type="email" name="" value="" required placeholder="Email"><br>
-        <br>
-        <input type="submit" class="submit action-button" value="Sign up">
-      </fieldset>
-    </form>
+  <video width="800" controls>
+    <source src="{% static 'intro.mp4' %}" type="video/mp4">
+  </video>
+
+
+  <div class="container">
+      <link rel="stylesheet" href="{%static 'multi_step_register.css'%}">
+      <h1 class="display-4" align="center"><br></h1>
+      <form id = "msform" action="" method="get">
+        <fieldset>
+          <h2 class="fs-title">Sign up for our newsletter!</h2>
+          <input class= "formInput"  type="text" name="" value="" required placeholder="First Name"><br>
+          <input class= "formInput" type="text" name="" value="" required placeholder="Last Name"><br>
+          <input class= "formInput" type="email" name="" value="" required placeholder="Email"><br>
+          <br>
+          <input type="submit" class="submit action-button" value="Sign up">
+        </fieldset>
+      </form>
   </div>
 </div>
+
+
 
 {% endblock %}
