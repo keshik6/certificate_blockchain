@@ -2,21 +2,60 @@
 {% load staticfiles %}
 
 {% block body_block %}
-<h1 class="display-4" align="center"><br></h1>
-<link rel="stylesheet/less" type="text/css" href="{% static 'dashboard-style.less' %}" />
-<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.0.0/less.min.js" ></script>
-<script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
-<div class="wrapper">
-  <section id="sideBar">
-    <nav>
-      <a href="#" class="active"><i id="dbIcon" class="fas fa-home"></i>Dashboard</a>
-      <a href="#"><i id="dbIcon" class="fas fa-user"></i>Profile</a>
-      <a href="#"><i id="dbIcon" class="fab fa-ethereum"></i>Ethereum Account</a>
-      <a href="#"><i id="dbIcon" class="fab fa-bandcamp"></i>Other</a>
-    </nav>
+  <h1 class="display-4" align="center"><br></h1>
+  <link rel="stylesheet/less" type="text/css" href="{% static 'dashboard-style.less' %}" />
+  <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.0.0/less.min.js" ></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+  <div class="wrapper">
+    <section id="sideBar">
+      <nav>
+        <a href="#" class="active"><i id="dbIcon" class="fas fa-user" ></i>Profile</a>
+        <a href="#"><i id="dbIcon" class="fab fa-ethereum"></i>Ethereum Account</a>
+        <a href="#"><i id="dbIcon" class="fab fa-bandcamp"></i>Other</a>
+      </nav>
+    </section>
 
-  </section>
 
-</div>
+    <section id="content-area">
+      <div class="heading">
+        <h1>Dashboard</h1>
+      </div>
+
+      <div class="cards" align="center">
+        <div class="col-md-3">
+          <div class="card">
+            <div class="user-img"></div>
+            <span class="user-name">{{username}}</span>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card">
+            {% if isAuth1 %}
+              <h2>You are an authenticated level 1 User</h2>
+            {% else %}
+              <h2>You are not authenticated level 1 User</h2>
+              <a href="{% url 'main_web_portal:verify1' %}">
+                <button  type="button" name="" class="submit action-button">Authenticate</button>
+              </a>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card">
+            {% if isAuth2 %}
+              <h2>You are an authenticated level 1 User</h2>
+            {% else %}
+              <h2>You are not authenticated level 1 User</h2>
+              <a href="{% url 'main_web_portal:verify2' %}">
+                <button  type="button" name="" class="submit action-button">Authenticate</button>
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
 
 {% endblock %}

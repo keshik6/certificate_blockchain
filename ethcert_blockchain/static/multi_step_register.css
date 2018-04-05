@@ -134,3 +134,7 @@
 .jumbotron {
 background-color:#c3daf2 !important;
 }
+
+.btn:hover{
+	color: white !important;
+}

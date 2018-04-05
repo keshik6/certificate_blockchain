@@ -10,12 +10,16 @@
   <div class="container">
       <h1 class="display-4" align="center"><br></h1>
       {% if registered %}
-      <div class="jumbotron jumbotron-fluid">
-        <h1 class="display-4">Thank you for Registering {{username}}!</h1>
-        <p class="lead">Verification code is sent to {{email}}. Login to ETHCERT to continue</p>
-        <hr class="my-4">
-        <p class="lead">
-          <a class="btn btn-primary btn-lg" href="{% url 'main_web_portal:user_login' %}" role="button">Login</a>
+      <div class="jumbotron">
+        <div align="center">
+          <img src="https://cdn1.iconfinder.com/data/icons/toolbar-signs/512/OK-512.png" align="middle" height="72" width="62">
+        </div>
+        <h1 class="display-4" align="center">Registration Success {{username}}!</h1>
+        <p class="lead" align="center">Verification code sent to {{email}}</p>
+        <hr class="my-4" size="30" align="center">
+        <p class="lead" align="center">Login to Ethcert Dashboard to continue</p>
+        <p class="lead" align="center">
+          <a class="btn btn-success btn-lg" href="{% url 'main_web_portal:user_login' %}" role="button">Login</a>
         </p>
       </div>
 

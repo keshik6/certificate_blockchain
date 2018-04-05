@@ -25,15 +25,25 @@ class UserProfile(models.Model):
     # website
     url = models.CharField(default="",max_length = 64)
 
+    # authentication parameters
+    auth1 = models.BooleanField(default=False)
+    auth2 = models.BooleanField(default=False)
+
     def __str__(self):
         # Built-in attribute of django.contrib.auth.models.User !
         return self.user.username
 
     def getVerificationCode1(self):
-        return 1;
+        return str(self.verification_code_lvl_1);
+
+    def setVerificationCode1(self, code):
+        self.verification_code_lvl_1 = code;
 
     def getVerificationCode2(self):
         return self.verification_code_lvl_2
+
+    def setVerificationCode2(self, code):
+        self.verification_code_lvl_2 = code;
 
     def getAddress(self):
         return self.address
@@ -47,3 +57,14 @@ class UserProfile(models.Model):
     def getUrl(self):
         return self.url
 
+    def isAuthenticated1(self):
+        return self.auth1
+
+    def isAuthenticated2(self):
+        return self.auth2
+
+    def setAuthenticated1(self):
+        self.auth1 = True;
+
+    def setAuthenticated2(self):
+        self.auth2 = True;
