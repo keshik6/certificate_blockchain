@@ -10,8 +10,6 @@
   top:50px;
   bottom: 0px;
 
-
-
   nav{
     a{
       display: block;
@@ -51,6 +49,104 @@
         }
       }
 
+    }
+  }
+}
+
+#content-area{
+  margin-left: 280px;
+  padding: 15px;
+
+  .heading{
+    h1{
+      color:purple;
+      font-size: 3rem;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+  }
+
+  .cards{
+    overflow: auto;
+    margin-bottom: 5px;
+
+    .card{
+      background: #acb9ea;
+      border-radius: 5px;
+      padding: 5px;
+      overflow: auto;
+
+      .user-img{
+          margin-top: 10px;
+          background: url('/static/profile_pic_sample.jpg');
+          background-repeat:no-repeat;
+          background-size:cover;
+          align-items: center;
+          width: 100px;
+          height: 120px;
+          border-radius: 50%;
+          display: inline-block;
+      }
+
+      .user-name{
+        font-size: 2rem;
+        color: purple;
+        display: block;
+      }
+
+      .authform{
+        width: 300px;
+      	text-align: center;
+      	position: relative;
+      	padding-bottom: 1px;
+        background: white;
+
+        .fieldset{
+          background: white;
+        	border: 0 none;
+        	border-radius: 3px;
+        	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+        	padding: 2px 3px;
+        	box-sizing: border-box;
+        	width: 80%;
+        	margin: 0 10%;
+        	color: black;
+        	/*stacking fieldsets above each other*/
+        	position: relative;
+        }
+
+        .input,.textarea{
+        	padding: 15px;
+        	border: 1px solid #ccc;
+        	border-radius: 3px;
+        	margin-bottom: 10px;
+        	width: 100%;
+        	box-sizing: border-box;
+        	font-family: montserrat;
+        	color: #2C3E50;
+        	font-size: 13px;
+        }
+
+        .action-button {
+        	width: 150px;
+        	background: #27AE60;
+        	font-weight: bold;
+        	color: white;
+        	border: 0 none;
+        	border-radius: 1px;
+        	cursor: pointer;
+        	padding: 10px 5px;
+        	margin: 10px 5px;
+
+          &:hover{
+            box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+          }
+
+          &:focus{
+            box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+          }
+        }
+      }
     }
   }
 }

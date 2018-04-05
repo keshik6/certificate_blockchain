@@ -63,9 +63,7 @@ def register(request):
             #     print('found it')
             #     # If yes, then grab it from the POST form reply
             #     profile.profile_pic = request.FILES['profile_pic']
-
-            # Now save model
-
+            profile.profile_pic = "{% static 'blk-new.jpg' %}"
 
             fakeGenerator = Faker()
             vercode1 = fakeGenerator.bban()
@@ -90,7 +88,7 @@ def register(request):
             email.send()
             print("Email sent Successfully")
             return render(request,'main_web_portal/registration.html',
-                                  {'username':user.username, 'email':user.email,
+                                  {'username':profile.user.username, 'email':profile.user.email,
                                    'registered':registered})
 
         else:
@@ -119,17 +117,18 @@ def user_login(request):
         password = request.POST.get('password')
 
         # Django's built-in authentication function:
-        user = authenticate(username=username, password=password)
+        User = authenticate(username=username, password=password)
 
         # If we have a user
-        if user:
+        if User:
             # Check it the account is active
-            if user.is_active:
+            if User.is_active:
                 # Log the user in.
-                login(request, user)
+                login(request, User)
                 # Send the user back to some page.
                 # In this case their homepage.
-                return render(request, 'main_web_portal/dashBoard.html', {})
+                context = getUserContext(User)
+                return render(request, 'main_web_portal/dashBoard.html', context)
             else:
                 # If account is not active:
                 return HttpResponse("Your account is not active.")
@@ -164,7 +163,9 @@ def view_cert(request):
 
 @login_required
 def dashboard(request):
-    return render(request, 'main_web_portal/dashBoard.html', {})
+    User = request.user;
+    context = getUserContext(User)
+    return render(request, 'main_web_portal/dashBoard.html', context)
 
 
 def handler404(request):
@@ -173,3 +174,49 @@ def handler404(request):
 
 def handler500(request):
     return render(request, 'main_web_portal/500.html', status= 500)
+
+def getUserContext(User):
+    profileList = UserProfile.objects.filter(user = User)
+    profile = profileList[0]
+    print(profile.isAuthenticated1())
+    context = {'username' : profile.user.username,
+    'isAuth1': profile.isAuthenticated1(),
+    'isAuth2': profile.isAuthenticated2(),
+    'email': profile.user.email,
+    'profile_pic': profile.profile_pic}
+    return context;
+
+def authForm1(request):
+    if request.method == 'POST':
+        print('posting')
+        User = request.user
+        profile = UserProfile.objects.filter(user = User)[0]
+        code = request.POST.get('authCode1')
+        print(code)
+        print(profile.getVerificationCode1())
+        if (code == profile.getVerificationCode1()):
+            profile.setAuthenticated1()
+            profile.save()
+            User.save()
+            print("done")
+            return dashboard(request)
+        else:
+            messages.error(request, 'Verification code incorrect')
+    else:
+        return render (request,'main_web_portal/authlvl1.html',{})
+
+
+def authForm2(request):
+    if request.method == 'POST':
+        print('posting')
+        User = request.user
+        profile = UserProfile.objects.filter(user = User)[0]
+        code = request.POST.get('authCode1')
+        if (code == profile.getVerificationCode2()):
+            profile.setAuthenticated1()
+            profile.save()
+            User.save()
+        return dashboard(request)
+
+    else:
+        return render (request,'main_web_portal/authlvl2.html',{})
