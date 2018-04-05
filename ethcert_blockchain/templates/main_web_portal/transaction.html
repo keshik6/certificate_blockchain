@@ -81,7 +81,6 @@
            if (web3.currentProvider.isMetaMask === true) {
                if (typeof web3.eth.defaultAccount === 'undefined') {
                   $("#sender_details").html("No Ethereum Account Detected. Make sure you are signed into Metamask" );
-                  location.reload();
                }
                else {
                    web3.eth.defaultAccount = web3.eth.accounts[0];
