@@ -65,7 +65,7 @@ def register(request):
             #     profile.profile_pic = request.FILES['profile_pic']
 
             # Now save model
-            profile.save()
+
 
             fakeGenerator = Faker()
             vercode1 = fakeGenerator.bban()
@@ -75,6 +75,7 @@ def register(request):
             print('Successfully registered')
             print("get profiles verification code " + profile.getVerificationCode1())
 
+            profile.save()
             # Registration Successful!
             registered = True
 
@@ -87,6 +88,7 @@ def register(request):
                         )
 
             email.send()
+            print("Email sent Successfully")
             return render(request,'main_web_portal/registration.html',
                                   {'username':user.username, 'email':user.email,
                                    'registered':registered})
