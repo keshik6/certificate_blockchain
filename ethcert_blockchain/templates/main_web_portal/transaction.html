@@ -8,9 +8,10 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
       <div class="container">
           <h1 class="display-4" align="center"><br></h1>
-					<h1>Send Certificate</h1>
-          <h2 id="sender_details">Detecting Ethereum Account using Metamask</h2>
-				<form id="msform" id ="award_page" accept-charset="utf-8">
+				  <h1 align="center"><span class="label label-default">Send Certificate</span></h1>
+          <h2 id="sender_details" align="center">Detecting Ethereum Account using Metamask</h2>
+
+        <form id="msform" id ="award_page" accept-charset="utf-8">
           <fieldset>
             Sender Proof:
 						<br>
@@ -47,11 +48,11 @@
 				<div class="modal-body">
 					<p>Confirm that you want to encrypt information.</p>
 					<p>Sender Proof, Receiver Proof, and Description will be encrypted once confirmed.</p>
-					<button id="confirmEncryptBtn" class="confirm-encrypt-button" onclick="return encryptModal()">Confirm</button> 
+					<button id="confirmEncryptBtn" class="confirm-encrypt-button" onclick="return encryptModal()">Confirm</button>
 				</div>
 			</div>
 		</div>
-		
+
 		<div id="modal-window-post" class="modal">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -63,7 +64,7 @@
 					<p>Sender Proof, Receiver Proof, and Description is now encrypted.</p>
 					<p>Please save the key below securely</p>
 					<p id="key">null</p>
-					<button id="confirmEncryptBtn" class="confirm-encrypt-button" onclick="closeModal()">Finish</button> 
+					<button id="confirmEncryptBtn" class="confirm-encrypt-button" onclick="closeModal()">Finish</button>
 				</div>
 			</div>
 		</div>
@@ -80,6 +81,7 @@
            if (web3.currentProvider.isMetaMask === true) {
                if (typeof web3.eth.defaultAccount === 'undefined') {
                   $("#sender_details").html("No Ethereum Account Detected. Make sure you are signed into Metamask" );
+                  location.reload();
                }
                else {
                    web3.eth.defaultAccount = web3.eth.accounts[0];

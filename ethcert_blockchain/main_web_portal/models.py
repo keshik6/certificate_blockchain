@@ -29,6 +29,9 @@ class UserProfile(models.Model):
     auth1 = models.BooleanField(default=False)
     auth2 = models.BooleanField(default=False)
 
+    #Ethereum address
+    eth_address = models.CharField(default="Not Setup",max_length = 64)
+
     def __str__(self):
         # Built-in attribute of django.contrib.auth.models.User !
         return self.user.username
@@ -68,3 +71,9 @@ class UserProfile(models.Model):
 
     def setAuthenticated2(self):
         self.auth2 = True;
+
+    def setEthAddress(self, address):
+        self.eth_address = address
+
+    def getEthAddress(self):
+        return self.eth_address
