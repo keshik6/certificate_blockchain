@@ -183,7 +183,8 @@ def getUserContext(User):
     'isAuth1': profile.isAuthenticated1(),
     'isAuth2': profile.isAuthenticated2(),
     'email': profile.user.email,
-    'profile_pic': profile.profile_pic}
+    'profile_pic': profile.profile_pic,
+    'ethAddress': profile.getEthAddress()}
     return context;
 
 def authForm1(request):
@@ -201,7 +202,8 @@ def authForm1(request):
             print("done")
             return dashboard(request)
         else:
-            messages.error(request, 'Verification code incorrect')
+            messages.error(request, 'Email Verification code incorrect')
+            return render (request,'main_web_portal/authlvl1.html',{})
     else:
         return render (request,'main_web_portal/authlvl1.html',{})
 
@@ -211,12 +213,14 @@ def authForm2(request):
         print('posting')
         User = request.user
         profile = UserProfile.objects.filter(user = User)[0]
-        code = request.POST.get('authCode1')
+        code = request.POST.get('authCode2')
         if (code == profile.getVerificationCode2()):
-            profile.setAuthenticated1()
+            profile.setAuthenticated2()
             profile.save()
             User.save()
-        return dashboard(request)
-
+            return dashboard(request)
+        else:
+            messages.error(request, 'Postal Verification code incorrect')
+            return render (request,'main_web_portal/authlvl2.html',{})
     else:
         return render (request,'main_web_portal/authlvl2.html',{})

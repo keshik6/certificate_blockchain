@@ -9,48 +9,78 @@
   <div class="wrapper">
     <section id="sideBar">
       <nav>
-        <a href="#" class="active"><i id="dbIcon" class="fas fa-user" ></i>Profile</a>
-        <a href="#"><i id="dbIcon" class="fab fa-ethereum"></i>Ethereum Account</a>
+        <a href="" class="active"><i id="dbIcon" class="fas fa-user" ></i>Profile</a>
+        <!--<a href="#"><i id="dbIcon" class="fab fa-ethereum"></i>Ethereum Account</a>-->
         <a href="#"><i id="dbIcon" class="fab fa-bandcamp"></i>Other</a>
       </nav>
     </section>
 
-
+    <link rel="stylesheet" href="{%static 'multi_step_register.css'%}">
     <section id="content-area">
-      <div class="heading">
-        <h1>Dashboard</h1>
+      <div class="cards" align="center">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="heading" align="center">
+            <h1>Dashboard</h1>
+          </div>
+        </div>
       </div>
+    </div>
 
       <div class="cards" align="center">
-        <div class="col-md-3">
+        <div class="col-md-4">
           <div class="card">
+            <span class="card-title">Profile Summary</span>
+            <hr>
             <div class="user-img"></div>
+            <hr>
             <span class="user-name">{{username}}</span>
+            <span class="user-email" align="left">Email : {{email}}</span>
+            <span class="user-email" align="left">Ethereum Account : {{ethAddress}}</span>
+
           </div>
         </div>
 
         <div class="col-md-4">
           <div class="card">
+            <span class="card-title">Single-Factor Authentication</span>
+            <hr>
             {% if isAuth1 %}
-              <h2>You are an authenticated level 1 User</h2>
+              <div align="center">
+                <img src="https://cdn1.iconfinder.com/data/icons/toolbar-signs/512/OK-512.png" align="middle" height="72" width="72">
+              </div>
+              <br>
             {% else %}
-              <h2>You are not authenticated level 1 User</h2>
+              <div align="center">
+                <img src="https://icon-icons.com/icons2/1154/PNG/512/1486564399-close_81512.png" align="middle" height="72" width="72">
+              </div>
+              <br>
               <a href="{% url 'main_web_portal:verify1' %}">
-                <button  type="button" name="" class="submit action-button">Authenticate</button>
+                <button type="button" name="" class="btn btn-info">Authenticate</button>
               </a>
+              <br>
             {% endif %}
           </div>
         </div>
 
         <div class="col-md-4">
           <div class="card">
+            <span class="card-title">Two-Factor Authentication</span>
+            <hr>
             {% if isAuth2 %}
-              <h2>You are an authenticated level 1 User</h2>
+              <div align="center">
+                <img src="https://cdn1.iconfinder.com/data/icons/toolbar-signs/512/OK-512.png" align="middle" height="72" width="72">
+              </div>
+              <br>
             {% else %}
-              <h2>You are not authenticated level 1 User</h2>
+              <div align="center">
+                <img src="https://icon-icons.com/icons2/1154/PNG/512/1486564399-close_81512.png" align="middle" height="72" width="72">
+              </div>
+              <br>
               <a href="{% url 'main_web_portal:verify2' %}">
-                <button  type="button" name="" class="submit action-button">Authenticate</button>
+                <button  type="button" name="" class="btn btn-success">Authenticate</button>
               </a>
+              <br>
             {% endif %}
           </div>
         </div>
