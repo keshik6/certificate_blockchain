@@ -46,3 +46,4 @@ class UserProfile(models.Model):
 
     def getUrl(self):
         return self.url
+
