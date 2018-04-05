@@ -15,6 +15,7 @@ eth-keyfile==0.5.1
 eth-keys==0.2.0b3
 eth-rlp==0.1.0
 eth-utils==1.0.2
+Faker==0.8.12
 hexbytes==0.1.0
 idna==2.6
 kombu==4.1.0
@@ -22,11 +23,13 @@ lru-dict==1.1.6
 Pillow==5.0.0
 psycopg2==2.7.4
 pycryptodome==3.5.1
+python-dateutil==2.7.2
 pytz==2018.3
 redis==2.10.6
 requests==2.18.4
 rlp==0.6.0
 six==1.11.0
+text-unidecode==1.2
 toolz==0.9.0
 urllib3==1.22
 vine==1.1.4
