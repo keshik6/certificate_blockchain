@@ -325,7 +325,12 @@
 						return;
 					} else {
 						var sendAdd = document.getElementById("senderAddress");
-						sendAdd.innerHTML = result;
+
+						if(result == 0) {
+							sendAdd.innerHTML = "";
+						} else {
+							sendAdd.innerHTML = result;
+						}
 					}
 				});
 
@@ -347,7 +352,12 @@
 						return;
 					} else {
 						var recAdd = document.getElementById("receiverAddress");
-						recAdd.innerHTML = result;
+
+						if(result == 0){
+							recAdd.innerHTML = "";
+						} else {
+							recAdd.innerHTML = result;
+						}
 					}
 				});
 
@@ -384,6 +394,7 @@
 						// if create time is 0 we can assume that the certificate does not exist
 						if(result == 0){
 							document.getElementById("alert").style.display = "block";
+							document.getElementById("createTime").innerHTML = "";
 						} else {
 							document.getElementById("alert").style.display = "none";
 						}

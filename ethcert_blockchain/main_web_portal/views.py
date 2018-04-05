@@ -165,6 +165,16 @@ def view_cert(request):
 def dashboard(request):
     User = request.user;
     context = getUserContext(User)
+    
+    if request.method == 'POST':
+        profile = UserProfile.objects.filter(user = User)[0]
+        code = request.POST.get('ethAddrInput')
+        print(code)
+        profile.setEthAddress(code)
+        profile.save()
+        User.save()
+        print("done")
+
     return render(request, 'main_web_portal/dashBoard.html', context)
 
 
@@ -178,7 +188,7 @@ def handler500(request):
 def getUserContext(User):
     profileList = UserProfile.objects.filter(user = User)
     profile = profileList[0]
-    print(profile.isAuthenticated1())
+    #print(profile.isAuthenticated1())
     context = {'username' : profile.user.username,
     'isAuth1': profile.isAuthenticated1(),
     'isAuth2': profile.isAuthenticated2(),
@@ -189,7 +199,6 @@ def getUserContext(User):
 
 def authForm1(request):
     if request.method == 'POST':
-        print('posting')
         User = request.user
         profile = UserProfile.objects.filter(user = User)[0]
         code = request.POST.get('authCode1')
