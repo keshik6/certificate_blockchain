@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+from celery.schedules import crontab
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
@@ -41,7 +42,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_celery_results',
+    'django_celery_beat',
     'main_web_portal',
+    'background_tasks',
 ]
 
 MIDDLEWARE = [
@@ -137,3 +141,17 @@ EMAIL_HOST_PASSWORD = 'Ethcert.ioSUTD' #my gmail password
 EMAIL_HOST_USER = 'ethcertio@gmail.com' #my gmail username
 EMAIL_PORT = 587
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# Celery 
+CELERY_BROKER_URL = 'redis://localhost:8888'
+CELERY_RESULT_BACKEND = 'redis://localhost:8888'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Asia/Singapore'
+CELERY_BEAT_SCHEDULE = {
+    'fetch-cert-task': {
+        'task': 'background_tasks.tasks.fetch_certificates',
+        'schedule': 30,
+    },
+}

@@ -11,11 +11,10 @@
           <h1 class="display-4" align="center"><br></h1>
 					<h1>Certificate Details</h1>
 					<!-- for user accessibility should we have a web3 in the server instead? -->
-					<h2 id="detect">Awaiting Web3 Interface</h2>
+					<h2 id="detect">Awaiting Web3 Socket</h2>
 					<div id="alert" class="alert alert-danger" style="display: none;">
 						<p>Certificate does not exist</p>
 					</div>
-					<p> If you observe 0 values, the certificate might be non-existent</p>
           <div class="table-responsive">
 						<table class="table table-bordered">
 							<tr>
@@ -66,9 +65,12 @@
 
     <script>
 			// get web3 instance
+			// using infura
+			web3 = new Web3(new Web3.providers.HttpProvider("https://rinkeby.infura.io/JRIhcMSUX50sCH9PKk6b"));
 			if(typeof web3 !== 'undefined'){
 				web3 = new Web3(web3.currentProvider);
-				$("#detect").html("Web3 interface connected");
+				// We use infura
+				$("#detect").html("Web3 socket is connected");
 			} else {
 				// fallback
 				web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
@@ -323,7 +325,12 @@
 						return;
 					} else {
 						var sendAdd = document.getElementById("senderAddress");
-						sendAdd.innerHTML = result;
+
+						if(result == 0) {
+							sendAdd.innerHTML = "";
+						} else {
+							sendAdd.innerHTML = result;
+						}
 					}
 				});
 
@@ -345,7 +352,12 @@
 						return;
 					} else {
 						var recAdd = document.getElementById("receiverAddress");
-						recAdd.innerHTML = result;
+
+						if(result == 0){
+							recAdd.innerHTML = "";
+						} else {
+							recAdd.innerHTML = result;
+						}
 					}
 				});
 
@@ -382,6 +394,7 @@
 						// if create time is 0 we can assume that the certificate does not exist
 						if(result == 0){
 							document.getElementById("alert").style.display = "block";
+							document.getElementById("createTime").innerHTML = "";
 						} else {
 							document.getElementById("alert").style.display = "none";
 						}

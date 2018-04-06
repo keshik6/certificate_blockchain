@@ -1,0 +1,222 @@
+[{
+  "constant": true,
+  "inputs": [
+	{
+	  "name": "",
+	  "type": "uint256"
+	}
+  ],
+  "name": "certificates",
+  "outputs": [
+	{
+	  "name": "sender",
+	  "type": "address"
+	},
+	{
+	  "name": "senderProof",
+	  "type": "string"
+	},
+	{
+	  "name": "receiver",
+	  "type": "address"
+	},
+	{
+	  "name": "receiverProof",
+	  "type": "string"
+	},
+	{
+	  "name": "description",
+	  "type": "string"
+	},
+	{
+	  "name": "creationtime",
+	  "type": "uint256"
+	}
+  ],
+  "payable": false,
+  "stateMutability": "view",
+  "type": "function"
+},
+{
+  "constant": true,
+  "inputs": [
+	{
+	  "name": "",
+	  "type": "uint256"
+	}
+  ],
+  "name": "certificateToSenderProof",
+  "outputs": [
+	{
+	  "name": "",
+	  "type": "string"
+	}
+  ],
+  "payable": false,
+  "stateMutability": "view",
+  "type": "function"
+},
+{
+  "constant": true,
+  "inputs": [
+	{
+	  "name": "",
+	  "type": "uint256"
+	}
+  ],
+  "name": "certificateToSender",
+  "outputs": [
+	{
+	  "name": "",
+	  "type": "address"
+	}
+  ],
+  "payable": false,
+  "stateMutability": "view",
+  "type": "function"
+},
+{
+  "constant": true,
+  "inputs": [
+	{
+	  "name": "",
+	  "type": "uint256"
+	}
+  ],
+  "name": "certificateToReceiverProof",
+  "outputs": [
+	{
+	  "name": "",
+	  "type": "string"
+	}
+  ],
+  "payable": false,
+  "stateMutability": "view",
+  "type": "function"
+},
+{
+  "constant": true,
+  "inputs": [
+	{
+	  "name": "",
+	  "type": "uint256"
+	}
+  ],
+  "name": "certificateToReceiver",
+  "outputs": [
+	{
+	  "name": "",
+	  "type": "address"
+	}
+  ],
+  "payable": false,
+  "stateMutability": "view",
+  "type": "function"
+},
+{
+  "constant": true,
+  "inputs": [
+	{
+	  "name": "",
+	  "type": "uint256"
+	}
+  ],
+  "name": "certificateToDescription",
+  "outputs": [
+	{
+	  "name": "",
+	  "type": "string"
+	}
+  ],
+  "payable": false,
+  "stateMutability": "view",
+  "type": "function"
+},
+{
+  "constant": true,
+  "inputs": [
+	{
+	  "name": "",
+	  "type": "uint256"
+	}
+  ],
+  "name": "certificateToCreateTime",
+  "outputs": [
+	{
+	  "name": "",
+	  "type": "uint256"
+	}
+  ],
+  "payable": false,
+  "stateMutability": "view",
+  "type": "function"
+},
+{
+  "anonymous": false,
+  "inputs": [
+	{
+	  "indexed": false,
+	  "name": "certificateId",
+	  "type": "uint256"
+	},
+	{
+	  "indexed": false,
+	  "name": "sender",
+	  "type": "address"
+	},
+	{
+	  "indexed": false,
+	  "name": "senderProof",
+	  "type": "string"
+	},
+	{
+	  "indexed": false,
+	  "name": "receiver",
+	  "type": "address"
+	},
+	{
+	  "indexed": false,
+	  "name": "receiverProof",
+	  "type": "string"
+	},
+	{
+	  "indexed": false,
+	  "name": "description",
+	  "type": "string"
+	},
+	{
+	  "indexed": false,
+	  "name": "creationTime",
+	  "type": "uint256"
+	}
+  ],
+  "name": "NewCertificate",
+  "type": "event"
+},
+{
+  "constant": false,
+  "inputs": [
+	{
+	  "name": "_senderProof",
+	  "type": "string"
+	},
+	{
+	  "name": "_receiver",
+	  "type": "address"
+	},
+	{
+	  "name": "_receiverProof",
+	  "type": "string"
+	},
+	{
+	  "name": "_description",
+	  "type": "string"
+	}
+  ],
+  "name": "createCertificate",
+  "outputs": [],
+  "payable": false,
+  "stateMutability": "nonpayable",
+  "type": "function"
+}
+]
