@@ -8,6 +8,7 @@ from django.db.models import Max
 
 from web3 import Web3, HTTPProvider
 from background_tasks.models import Certificate
+from main_web_portal.models import UserProfile
 
 # import web3.middleware geth_poa_middleware to handle rinkeby POA
 from web3.middleware import geth_poa_middleware
@@ -34,8 +35,7 @@ def fetch_certificates():
     # instantiate contract
     contract = w3.eth.contract(address= contract_address, abi= abi_c)   
 
-    # we are indexed at 1
-    count = 1
+    count = 0
 
     # try to get highest count from db and + 1
     try:
@@ -62,7 +62,7 @@ def fetch_certificates():
             # check if the field exists if so pass
             Certificate.objects.get(certificate_id=count)
 
-        except:      
+        except:
             Certificate.objects.create(certificate_id = count,
                                        receiver_address = rec_ad,
                                        receiver_proof = rec_pf,
@@ -75,3 +75,17 @@ def fetch_certificates():
         count += 1
 
 
+@task
+def update_user_received():
+    """
+    Periodically update user table with detected received certs
+    """
+    pass
+
+
+@task
+def update_user_sent():
+    """
+    Periodically check the db and update the detected sent certs
+    """
+    pass
