@@ -34,7 +34,7 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
                 {% if user.is_authenticated %}
-                  <li><a href="{% url 'main_web_portal:dashboard'%}">DashBoard<span class="sr-only">(current)</span></a></li>
+                  <li><a href="{% url 'main_web_portal:dashboard'%}">Dashboard<span class="sr-only">(current)</span></a></li>
 									<li><a href="{% url 'main_web_portal:transaction'%}">Award Certificate<span class="sr-only">(current)</span></a></li>
                   <li class="nav navbar-right"><a href="{% url 'main_web_portal:user_logout'%}">Log out<span class="sr-only">(current)</span></a></li>
 								{% else %}
@@ -67,7 +67,7 @@
   <!-- Need to have JQuery and Javascript for DropDown Actions to work -->
 
   {% block body_block %}
-  {% endblock %}
+  {% endblock body_block %}
 
 </body>
 </html>

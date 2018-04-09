@@ -14,6 +14,8 @@ urlpatterns=[
     url(r'^team/$',views.team,name='team'),
     url(r'^viewcert/$',views.view_cert,name='view_cert'),
     url(r'^dashboard/$',views.dashboard,name='dashboard'),
+    url(r'^dashboard/sentcert/$', views.dashboard_sentcert, name='dashboard_sentcert'),
+    url(r'^dashboard/receivedcert/$', views.dashboard_receivedcert, name='dashboard_receivedcert'),
     url(r'^verify1/$',views.authForm1,name="verify1"),
     url(r'^verify2/$',views.authForm2,name="verify2"),
 ]

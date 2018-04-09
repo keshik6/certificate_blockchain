@@ -30,10 +30,10 @@ def fetch_certificates():
     # read abi
     PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
     with open(os.path.join(PROJECT_ROOT, 'abi.json'), 'r') as f:
-	    abi_c = json.load(f)
+        abi_c = json.load(f)
 
     # instantiate contract
-    contract = w3.eth.contract(address= contract_address, abi= abi_c)   
+    contract = w3.eth.contract(address= contract_address, abi= abi_c)
 
     count = 0
 
@@ -80,7 +80,11 @@ def update_user_received():
     """
     Periodically update user table with detected received certs
     """
-    pass
+    users = UserProfile.objects.all()
+    for user in users:
+        print(user)
+
+
 
 
 @task

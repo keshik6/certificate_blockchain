@@ -9,113 +9,14 @@
   <div class="wrapper">
     <section id="sideBar">
       <nav>
-        <a href="" class="active"><i id="dbIcon" class="fas fa-user" ></i>Profile</a>
-        <!--<a href="#"><i id="dbIcon" class="fab fa-ethereum"></i>Ethereum Account</a>-->
-        <a href="#"><i id="dbIcon" class="fab fa-bandcamp"></i>Other</a>
+				<a href="{% url 'main_web_portal:dashboard' %}" class="active"><i id="dbIcon" class="fas fa-user" ></i>Profile</a>
+				<a href="{% url 'main_web_portal:dashboard_sentcert' %}"><i id="dbIcon" class="fas fa-paper-plane"></i>Sent Certificates</a>
+				<a href="{% url 'main_web_portal:dashboard_receivedcert' %}"><i id="dbIcon" class="fas fa-archive"></i>Received Certificates</a>
+				<!---<a href="#"><i id="dbIcon" class="fab fa-bandcamp"></i>Other</a> -->
       </nav>
     </section>
 
-    <link rel="stylesheet" href="{%static 'multi_step_register.css'%}">
-    <section id="content-area">
-      <div class="cards" align="center">
-      <div class="col-md-12">
-        <div class="card-header">
-          <div class="heading" align="center">
-            <h1>Dashboard</h1>
-          </div>
-        </div>
-      </div>
-    </div>
+		{% block dashboard_content %}
+		{% endblock dashboard_content %}
 
-      <div class="cards" align="center">
-        <div class="col-md-4">
-          <div class="card">
-            <span class="card-title">Profile Summary</span>
-            <hr>
-            <div class="user-img"></div>
-            <hr>
-            <span class="user-name">{{username}}</span>
-            <span class="user-email">Email : {{email}}</span>
-	          <span class="user-email">Saved Ethereum Account: {{ethAddress}}</span>
-	          <span id="ethaddr" class="user-email">Current Ethereum Account: </span>
-						<br>
-						<form method="post">
-							{% csrf_token %}
-							<fieldset>
-								<input id="ethaddrinput" name="ethAddrInput" type="hidden"><br>
-								<input type="submit" name="" value="Update Eth Address" class="btn btn-success">
-							</fieldset>
-						</form>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="card">
-            <span class="card-title">Single-Factor Authentication</span>
-            <hr>
-            {% if isAuth1 %}
-              <div align="center">
-                <img src="https://cdn1.iconfinder.com/data/icons/toolbar-signs/512/OK-512.png" align="middle" height="72" width="72">
-              </div>
-              <br>
-            {% else %}
-              <div align="center">
-                <img src="https://icon-icons.com/icons2/1154/PNG/512/1486564399-close_81512.png" align="middle" height="72" width="72">
-              </div>
-              <br>
-              <a href="{% url 'main_web_portal:verify1' %}">
-                <button type="button" name="" class="btn btn-success">Authenticate</button>
-              </a>
-              <br>
-            {% endif %}
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="card">
-            <span class="card-title">Two-Factor Authentication</span>
-            <hr>
-            {% if isAuth2 %}
-              <div align="center">
-                <img src="https://cdn1.iconfinder.com/data/icons/toolbar-signs/512/OK-512.png" align="middle" height="72" width="72">
-              </div>
-              <br>
-            {% else %}
-              <div align="center">
-                <img src="https://icon-icons.com/icons2/1154/PNG/512/1486564399-close_81512.png" align="middle" height="72" width="72">
-              </div>
-              <br>
-              <a href="{% url 'main_web_portal:verify2' %}">
-                <button  type="button" name="" class="btn btn-success">Authenticate</button>
-              </a>
-              <br>
-            {% endif %}
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-
-	<script>
-		window.addEventListener('load', function () {
-			if (typeof web3 !== 'undefined') {
-      	// Use Mist/MetaMask's provider
-        window.web3 = new Web3(web3.currentProvider);
-        	if (web3.currentProvider.isMetaMask === true) {
-          	if (typeof web3.eth.defaultAccount === 'undefined') {
-            	$("#sender_details").html("No Ethereum Account Detected. Make sure you are signed into Metamask" );
-            } else {
-            	web3.eth.defaultAccount = web3.eth.accounts[0];
-							document.getElementById("ethaddr").innerHTML = "Current Ethereum Account: " + web3.eth.accounts[0].toString();
-							document.getElementById("ethaddrinput").value = web3.eth.accounts[0].toString();
-														
-           	} 
-          } else {
-          	// fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
-          	window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-          }
-			 }	
-		});
-	</script>
-
-{% endblock %}
+{% endblock body_block %}

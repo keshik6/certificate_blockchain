@@ -1,0 +1,38 @@
+{% extends "main_web_portal/dashBoard.html" %}
+{% load staticfiles %}
+{% block dashboard_content %}
+	<link rel="stylesheet" href="{%static 'multi_step_register.css'%}">
+    <section id="content-area">
+      <div class="cards" align="center">
+      <div class="col-md-12">
+        <div class="card-header">
+          <div class="heading" align="center">
+            <h1>Sent Certificates</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+
+	<script>
+		window.addEventListener('load', function () {
+			if (typeof web3 !== 'undefined') {
+      	// Use Mist/MetaMask's provider
+        window.web3 = new Web3(web3.currentProvider);
+        	if (web3.currentProvider.isMetaMask === true) {
+          	if (typeof web3.eth.defaultAccount === 'undefined') {
+            	$("#sender_details").html("No Ethereum Account Detected. Make sure you are signed into Metamask" );
+            } else {
+            	web3.eth.defaultAccount = web3.eth.accounts[0];
+							document.getElementById("ethaddr").innerHTML = "Current Ethereum Account: " + web3.eth.accounts[0].toString();
+							document.getElementById("ethaddrinput").value = web3.eth.accounts[0].toString();
+														
+           	} 
+          } else {
+          	// fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
+          	window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+          }
+			 }	
+		});
+	</script>
+
+{% endblock dashboard_content %}

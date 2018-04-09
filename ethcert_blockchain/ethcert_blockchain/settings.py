@@ -154,4 +154,14 @@ CELERY_BEAT_SCHEDULE = {
         'task': 'background_tasks.tasks.fetch_certificates',
         'schedule': 30,
     },
+
+    'update-received': {
+        'task': 'background_tasks.tasks.update_user_received',
+        'schedule': 30,
+    },
+
+    'update-sent': {
+        'task': 'background_tasks.tasks.update_user_sent',
+        'schedule': 30,
+    },
 }

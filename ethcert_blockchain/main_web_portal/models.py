@@ -1,5 +1,25 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User 
+
+class ReceivedCertificates(models.Model):
+    certificate_id = models.IntegerField(unique= True)
+    receiver_address = models.CharField(max_length= 50)
+    receiver_proof = models.CharField(max_length= 500)
+    sender_address = models.CharField(max_length= 50)
+    sender_proof = models.CharField(max_length= 500)
+    description = models.CharField(max_length= 500)
+    create_time = models.IntegerField()
+
+
+class SentCertificates(models.Model):
+    certificate_id = models.IntegerField(unique= True)
+    receiver_address = models.CharField(max_length= 50)
+    receiver_proof = models.CharField(max_length= 500)
+    sender_address = models.CharField(max_length= 50)
+    sender_proof = models.CharField(max_length= 500)
+    description = models.CharField(max_length= 500)
+    create_time = models.IntegerField()
+
 
 # Create your models here.
 class UserProfile(models.Model):
@@ -29,8 +49,19 @@ class UserProfile(models.Model):
     auth1 = models.BooleanField(default=False)
     auth2 = models.BooleanField(default=False)
 
-    #Ethereum address
+    # Ethereum address
     eth_address = models.CharField(default="Not Setup",max_length = 64)
+
+    # certificates
+    sent_cert = models.ForeignKey(SentCertificates,
+                                  null = True,
+                                  db_column='sentCerts',
+                                  blank = True)
+    received_cert = models.ForeignKey(ReceivedCertificates,
+                                     null = True,
+                                     db_column='receivedCerts',
+                                     blank = True)
+
 
     def __str__(self):
         # Built-in attribute of django.contrib.auth.models.User !
@@ -77,3 +108,5 @@ class UserProfile(models.Model):
 
     def getEthAddress(self):
         return self.eth_address
+
+

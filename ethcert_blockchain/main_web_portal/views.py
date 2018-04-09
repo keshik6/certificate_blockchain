@@ -162,8 +162,9 @@ def view_cert(request):
                       {"certID": search_query})
 
 @login_required
+# Default view is the profile view
 def dashboard(request):
-    User = request.user;
+    User = request.user
     context = getUserContext(User)
     
     if request.method == 'POST':
@@ -175,8 +176,23 @@ def dashboard(request):
         User.save()
         print("done")
 
-    return render(request, 'main_web_portal/dashBoard.html', context)
+    return render(request, 'main_web_portal/dashboard_profile.html', context)
 
+
+@login_required
+def dashboard_sentcert(request):
+    User = request.user
+    context = getUserContext(User)
+    
+    return render(request, 'main_web_portal/dashboard_sentcert.html', context)
+
+
+@login_required
+def dashboard_receivedcert(request):
+    User = request.user
+    context = getUserContext(User)
+    
+    return render(request, 'main_web_portal/dashboard_receivedcert.html', context)
 
 def handler404(request):
     return render(request, 'main_web_portal/404.html', status= 404)
