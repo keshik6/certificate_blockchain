@@ -16,5 +16,5 @@ urlpatterns=[
     url(r'^dashboard/$',views.dashboard,name='dashboard'),
     url(r'^verify1/$',views.authForm1,name="verify1"),
     url(r'^verify2/$',views.authForm2,name="verify2"),
-    url(r'^updatePic/$',views.updateProfilePic, name="updatePic"),
+    url('updatePic/$',views.updateProfilePic, name="updatePic"),
 ]

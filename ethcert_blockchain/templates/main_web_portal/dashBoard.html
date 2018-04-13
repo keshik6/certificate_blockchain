@@ -102,8 +102,11 @@
       <div class="col-md-12">
         <div class="card-header">
           <div class="heading" align="center">
-            {{picForm}}
-            <a href="{% url 'main_web_portal:updatePic' %}"><h1>Click me to update the pic</h1></a>
+            <form enctype="multipart/form-data" method="POST" action="{% url '/updatePic' %}">
+                {% csrf_token %}
+                {{picForm}}
+                <input type="submit" name="" value="Change Pic">
+              </form>
           </div>
         </div>
       </div>

@@ -239,6 +239,7 @@ def authForm2(request):
 
 def updateProfilePic(request):
     if request.method == 'POST':
+        print("here")
         picForm = UserProfileInfoForm(data = request.post)
 
         User = request.user
@@ -251,6 +252,7 @@ def updateProfilePic(request):
 
                 # Now save model
                 profile.save()
+                user.save()
 
 
     return dashboard(request)
