@@ -102,17 +102,12 @@
       <div class="col-md-12">
         <div class="card-header">
           <div class="heading" align="center">
-            <form action="/action_page.php">
-              <input type="file" name="pic" accept="image/*">
-              <input type="submit">
-            </form>
+            {{picForm}}
+            <a href="{% url 'main_web_portal:updatePic' %}"><h1>Click me to update the pic</h1></a>
           </div>
         </div>
       </div>
     </div>
-
-
-
     </section>
 
 

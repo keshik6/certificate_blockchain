@@ -189,12 +189,14 @@ def getUserContext(User):
     profileList = UserProfile.objects.filter(user = User)
     profile = profileList[0]
     #print(profile.isAuthenticated1())
+    picForm = UserProfileInfoForm()
     context = {'username' : profile.user.username,
     'isAuth1': profile.isAuthenticated1(),
     'isAuth2': profile.isAuthenticated2(),
     'email': profile.user.email,
     'profile_pic': profile.profile_pic,
-    'ethAddress': profile.getEthAddress()}
+    'ethAddress': profile.getEthAddress(),
+    'picForm':picForm}
     return context;
 
 def authForm1(request):
@@ -237,9 +239,18 @@ def authForm2(request):
 
 def updateProfilePic(request):
     if request.method == 'POST':
-        print('posting')
+        picForm = UserProfileInfoForm(data = request.post)
+
         User = request.user
         profile = UserProfile.objects.filter(user = User)[0]
 
         if 'profile_pic' in request.FILES:
-            print( "found profile pic")
+                print('found it')
+                # If yes, then grab it from the POST form reply
+                profile.profile_pic = request.FILES['profile_pic']
+
+                # Now save model
+                profile.save()
+
+
+    return dashboard(request)
