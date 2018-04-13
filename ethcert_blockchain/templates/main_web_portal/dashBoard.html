@@ -27,6 +27,8 @@
       </div>
     </div>
 
+
+
       <div class="cards" align="center">
         <div class="col-md-4">
           <div class="card">
@@ -39,9 +41,11 @@
 	          <span class="user-email">Saved Ethereum Account: {{ethAddress}}</span>
 	          <span id="ethaddr" class="user-email">Current Ethereum Account: </span>
 						<br>
-						<form method="post">
+
+
+            <form method="post">
 							{% csrf_token %}
-							<fieldset>
+              <fieldset>
 								<input id="ethaddrinput" name="ethAddrInput" type="hidden"><br>
 								<input type="submit" name="" value="Update Eth Address" class="btn btn-success">
 							</fieldset>
@@ -90,10 +94,28 @@
               </a>
               <br>
             {% endif %}
+        </div>
+      </div>
+    </div>
+
+      <div class="cards" align="center">
+      <div class="col-md-12">
+        <div class="card-header">
+          <div class="heading" align="center">
+            <form action="/action_page.php">
+              <input type="file" name="pic" accept="image/*">
+              <input type="submit">
+            </form>
           </div>
         </div>
       </div>
+    </div>
+
+
+
     </section>
+
+
   </div>
 
 	<script>
@@ -108,13 +130,13 @@
             	web3.eth.defaultAccount = web3.eth.accounts[0];
 							document.getElementById("ethaddr").innerHTML = "Current Ethereum Account: " + web3.eth.accounts[0].toString();
 							document.getElementById("ethaddrinput").value = web3.eth.accounts[0].toString();
-														
-           	} 
+
+           	}
           } else {
           	// fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
           	window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
           }
-			 }	
+			 }
 		});
 	</script>
 

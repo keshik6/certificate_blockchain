@@ -165,7 +165,7 @@ def view_cert(request):
 def dashboard(request):
     User = request.user;
     context = getUserContext(User)
-    
+
     if request.method == 'POST':
         profile = UserProfile.objects.filter(user = User)[0]
         code = request.POST.get('ethAddrInput')
@@ -233,3 +233,13 @@ def authForm2(request):
             return render (request,'main_web_portal/authlvl2.html',{})
     else:
         return render (request,'main_web_portal/authlvl2.html',{})
+
+
+def updateProfilePic(request):
+    if request.method == 'POST':
+        print('posting')
+        User = request.user
+        profile = UserProfile.objects.filter(user = User)[0]
+
+        if 'profile_pic' in request.FILES:
+            print( "found profile pic")
