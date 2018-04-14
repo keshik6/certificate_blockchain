@@ -63,7 +63,7 @@ def register(request):
             #     print('found it')
             #     # If yes, then grab it from the POST form reply
             #     profile.profile_pic = request.FILES['profile_pic']
-            profile.profile_pic = "{% static 'blk-new.jpg' %}"
+            profile.profile_pic = "profile_pics/default-profile-pic.jpg"
 
             fakeGenerator = Faker()
             vercode1 = fakeGenerator.bban()
@@ -170,7 +170,9 @@ def dashboard(request):
         profile = UserProfile.objects.filter(user = User)[0]
         code = request.POST.get('ethAddrInput')
         print(code)
-        profile.setEthAddress(code)
+        if (code != None):
+            profile.setEthAddress(code)
+
         profile.save()
         User.save()
         print("done")
@@ -194,7 +196,7 @@ def getUserContext(User):
     'isAuth1': profile.isAuthenticated1(),
     'isAuth2': profile.isAuthenticated2(),
     'email': profile.user.email,
-    'profile_pic': profile.profile_pic,
+    'profile_pic': profile.profile_pic.url,
     'ethAddress': profile.getEthAddress(),
     'picForm':picForm}
     return context;
@@ -237,10 +239,27 @@ def authForm2(request):
         return render (request,'main_web_portal/authlvl2.html',{})
 
 
+def personalDetails(request):
+    if request.method == 'POST':
+        print('posting')
+        User = request.user
+        profile = UserProfile.objects.filter(user = User)[0]
+
+        address = request.POST.get('address')
+        websiteUrl = request.POST.get('websiteUrl')
+
+        profile.setAddress(address)
+        profile.setUrl(websiteUrl)
+        profile.save()
+        User.save()
+
+    return render (request,'main_web_portal/personalDetails.html',{})
+
+
 def updateProfilePic(request):
     if request.method == 'POST':
         print("here")
-        picForm = UserProfileInfoForm(data = request.post)
+        picForm = UserProfileInfoForm(data = request.POST)
 
         User = request.user
         profile = UserProfile.objects.filter(user = User)[0]
@@ -252,7 +271,7 @@ def updateProfilePic(request):
 
                 # Now save model
                 profile.save()
-                user.save()
+                User.save()
 
 
     return dashboard(request)

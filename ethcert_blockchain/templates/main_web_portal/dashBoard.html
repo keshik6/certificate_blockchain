@@ -1,5 +1,6 @@
 {% extends "main_web_portal/blueprint.html" %}
 {% load staticfiles %}
+{ % load MEDIA_URL %}
 
 {% block body_block %}
   <h1 class="display-4" align="center"><br></h1>
@@ -27,14 +28,12 @@
       </div>
     </div>
 
-
-
       <div class="cards" align="center">
         <div class="col-md-4">
           <div class="card">
             <span class="card-title">Profile Summary</span>
             <hr>
-            <div class="user-img"></div>
+            <img class="user-img" src= '{{profile_pic}}' alt="">
             <hr>
             <span class="user-name">{{username}}</span>
             <span class="user-email">Email : {{email}}</span>
@@ -98,21 +97,46 @@
       </div>
     </div>
 
-      <div class="cards" align="center">
-      <div class="col-md-12">
-        <div class="card-header">
-          <div class="heading" align="center">
-            <form enctype="multipart/form-data" method="POST" action="{% url '/updatePic' %}">
+
+      <div class="col-md-4">
+        <div class="cards" align="center">
+            <div class="card-header">
+              <div class="heading" align="center">
+                <h1>Update Profile Pic</h1>
+                <hr>
+              </div>
+
+            <form enctype="multipart/form-data" method="POST" action="{% url 'main_web_portal:updatePic' %}">
                 {% csrf_token %}
-                {{picForm}}
+                {% for field in picForm %}
+                    <div class="fieldWrapper">
+                        <div class="formInput">
+                        {{ field }}
+                        </div>
+                    </div>
+                    <br>
+                {% endfor %}
                 <input type="submit" name="" value="Change Pic">
-              </form>
+            </form>
           </div>
         </div>
       </div>
-    </div>
-    </section>
 
+      <div class="col-md-4">
+        <div class="cards" align="center">
+            <div class="card-header">
+              <div class="heading" align="center">
+                <h1>Update Personal Details</h1>
+                <hr>
+              </div>
+              <a href="{% url 'main_web_portal:getDetails' %}">
+                <button type="button" name="" class="btn btn-success">Update</button>
+              </a>
+          </div>
+        </div>
+      </div>
+
+    </section>
 
   </div>
 
