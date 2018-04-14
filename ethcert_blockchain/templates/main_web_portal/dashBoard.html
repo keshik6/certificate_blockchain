@@ -46,7 +46,7 @@
 							{% csrf_token %}
               <fieldset>
 								<input id="ethaddrinput" name="ethAddrInput" type="hidden"><br>
-								<input type="submit" name="" value="Update Eth Address" class="btn btn-success">
+								<input type="submit" name="" value="Update Ethereum Address" class="btn btn-success">
 							</fieldset>
 						</form>
           </div>
@@ -97,6 +97,18 @@
       </div>
     </div>
 
+    <br>
+    <br>
+
+    <div class="cards" align="center">
+      <div class="col-md-12">
+        <div class="card-header">
+          <div class="heading" align="center">
+            <h1>ACTIONS</h1>
+          </div>
+        </div>
+      </div>
+    </div>
 
       <div class="col-md-4">
         <div class="cards" align="center">
@@ -116,7 +128,7 @@
                     </div>
                     <br>
                 {% endfor %}
-                <input type="submit" name="" value="Change Pic">
+                <input type="submit" name="" class="btn btn-success" value="Change Pic">
             </form>
           </div>
         </div>
@@ -129,8 +141,8 @@
                 <h1>Update Personal Details</h1>
                 <hr>
               </div>
-              <a href="{% url 'main_web_portal:getDetails' %}">
-                <button type="button" name="" class="btn btn-success">Update</button>
+              <a href="getDetails">
+                <button  type="button" name="" class="btn btn-success">Update</button>
               </a>
           </div>
         </div>

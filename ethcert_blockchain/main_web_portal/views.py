@@ -11,7 +11,7 @@ from django.shortcuts import render, render_to_response
 from django.template import RequestContext
 from faker import Faker
 from main_web_portal.models import UserProfile
-
+from django.contrib.auth.models import User
 
 # Create your views here.
 def index(request):
@@ -157,9 +157,28 @@ def view_cert(request):
     if request.method == 'POST':
         # handle empty fields in javascript
         search_query = request.POST.get('searchtext')
-        print("clicked, searching {}".format(search_query))
-        return render(request, 'main_web_portal/viewCertificate.html',
-                      {"certID": search_query})
+        print(representsInt(search_query))
+        if (representsInt(search_query)):
+            print("clicked, searching {}".format(search_query))
+            return render(request, 'main_web_portal/viewCertificate.html',
+                          {"certID": search_query})
+
+        else:
+            print("clicked, searching profile{}".format(search_query))
+            userObject= User.objects.filter(username = search_query)
+            print(userObject.count())
+            if (userObject.count() != 0):
+                print("user found: " + str(userObject[0]))
+                profile = UserProfile.objects.filter(user = userObject[0])[0]
+                print("hello" + str(profile))
+                context = getUserContext(userObject[0])
+                context['NA'] = False
+                return render(request,'main_web_portal/publicProfile.html',context)
+
+            else:
+                context = dict()
+                context['NA'] = True
+                return render(request,'main_web_portal/publicProfile.html',context)
 
 @login_required
 def dashboard(request):
@@ -187,6 +206,7 @@ def handler404(request):
 def handler500(request):
     return render(request, 'main_web_portal/500.html', status= 500)
 
+
 def getUserContext(User):
     profileList = UserProfile.objects.filter(user = User)
     profile = profileList[0]
@@ -198,9 +218,13 @@ def getUserContext(User):
     'email': profile.user.email,
     'profile_pic': profile.profile_pic.url,
     'ethAddress': profile.getEthAddress(),
-    'picForm':picForm}
+    'picForm':picForm,
+    'address':profile.getAddress(),
+    'url': profile.getUrl()}
     return context;
 
+
+@login_required
 def authForm1(request):
     if request.method == 'POST':
         User = request.user
@@ -212,7 +236,6 @@ def authForm1(request):
             profile.setAuthenticated1()
             profile.save()
             User.save()
-            print("done")
             return dashboard(request)
         else:
             messages.error(request, 'Email Verification code incorrect')
@@ -221,9 +244,9 @@ def authForm1(request):
         return render (request,'main_web_portal/authlvl1.html',{})
 
 
+@login_required
 def authForm2(request):
     if request.method == 'POST':
-        print('posting')
         User = request.user
         profile = UserProfile.objects.filter(user = User)[0]
         code = request.POST.get('authCode2')
@@ -238,10 +261,9 @@ def authForm2(request):
     else:
         return render (request,'main_web_portal/authlvl2.html',{})
 
-
+@login_required
 def personalDetails(request):
     if request.method == 'POST':
-        print('posting')
         User = request.user
         profile = UserProfile.objects.filter(user = User)[0]
 
@@ -252,13 +274,14 @@ def personalDetails(request):
         profile.setUrl(websiteUrl)
         profile.save()
         User.save()
+        return render (request,'main_web_portal/dashBoard.html',{})
 
     return render (request,'main_web_portal/personalDetails.html',{})
 
 
+@login_required
 def updateProfilePic(request):
     if request.method == 'POST':
-        print("here")
         picForm = UserProfileInfoForm(data = request.POST)
 
         User = request.user
@@ -273,5 +296,11 @@ def updateProfilePic(request):
                 profile.save()
                 User.save()
 
-
     return dashboard(request)
+
+def representsInt(s):
+    try:
+        int(s)
+        return True
+    except ValueError:
+        return False
