@@ -1,0 +1,21 @@
+{% extends "main_web_portal/blueprint.html" %}
+{% load staticfiles %}
+
+{% block body_block %}
+  <h1 class="display-4" align="center"><br></h1>
+  <link rel="stylesheet" href="{%static 'multi_step_register.css'%}">
+  <form id="msform" method="post">
+    {% csrf_token %}
+    <fieldset>
+      <h2 class="fs-title">Enter Personal Details</h2>
+      <input class= "formInput" type="text" name="address" placeholder="Address"><br>
+      <br>
+
+      <input class= "formInput" type="text" name="websiteUrl" placeholder="Website/Blog URL"><br>
+      <br>
+
+      <input type="submit" name="" value="Verify" class="submit action-button">
+    </fieldset>
+  </form>
+
+{% endblock %}
