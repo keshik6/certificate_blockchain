@@ -30,6 +30,15 @@ def register(request):
     registered = False
 
     if request.method == 'POST':
+        password = request.POST.get('password')
+        confirmPassword = request.POST.get('passwordConfirm')
+        if (password != confirmPassword):
+            messages.error(request, 'Passwords do not match')
+            user_form = UserForm()
+            return render(request,'main_web_portal/registration.html',
+                                  {'user_form':user_form,
+                                   'registered':registered})
+
         # Get info from "both" forms
         # It appears as one form to the user on the .html page
 
@@ -274,7 +283,7 @@ def personalDetails(request):
         profile.setUrl(websiteUrl)
         profile.save()
         User.save()
-        return render (request,'main_web_portal/dashBoard.html',{})
+        return dashboard(request)
 
     return render (request,'main_web_portal/personalDetails.html',{})
 

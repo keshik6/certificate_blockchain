@@ -37,11 +37,20 @@
                   <br>
               {% endfor %}
 
+            <input type="password" name="passwordConfirm" placeholder="Confirm Password" required/>
             <input type="submit" name="submit" class="submit action-button" value="Submit" />
             <br>
           </fieldset>
         </form>
       {% endif %}
+
+      {% for message in messages %}
+            <div class="alert alert-danger">
+                <a class="close" href="#" data-dismiss="alert">×</a>
+                {{ message }}
+            </div>
+      {% endfor %}
+      
   </div>
 
 {% endblock %}
