@@ -17,6 +17,7 @@ from django.conf.urls import url, include, handler404, handler500
 from django.conf import settings
 from django.contrib import admin
 from main_web_portal import views
+from django.conf.urls.static import static
 
 # error views
 handler404 = 'main_web_portal.views.handler404'
@@ -26,5 +27,4 @@ urlpatterns = [
     url(r'^$',views.index, name="index"),
     url(r'^admin/', admin.site.urls),
     url(r'^main_web_portal/',include('main_web_portal.urls')),
-    ]
-
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

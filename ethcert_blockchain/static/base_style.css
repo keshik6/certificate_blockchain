@@ -112,7 +112,7 @@ a:hover {
   background: url('/static/blur-blurry.jpg');
   background-repeat:no-repeat;
   background-size:cover;
-  height:1500px;width:100%;
+  height:1300px;width:100%;
   opacity: 0.97;
   align-items: center;
   display: block;
@@ -129,7 +129,7 @@ a:hover {
 }
 
 #lab{
-  margin-top: 100px;
+  margin-top: 200px;
   text-align: center;
   color: white;
   font-family: 'Palanquin Dark', sans-serif;

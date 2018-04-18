@@ -40,10 +40,10 @@ class UserProfile(models.Model):
     verification_code_lvl_2 = models.CharField(default="",max_length = 64)
 
     # address
-    address = models.CharField(default="",max_length = 64)
+    address = models.CharField(default="NA",max_length = 64, null=True, blank=True)
 
     # website
-    url = models.CharField(default="",max_length = 64)
+    url = models.CharField(default="NA",max_length = 64, null=True, blank=True)
 
     # authentication parameters
     auth1 = models.BooleanField(default=False)
@@ -68,19 +68,20 @@ class UserProfile(models.Model):
         return self.user.username
 
     def getVerificationCode1(self):
-        return str(self.verification_code_lvl_1);
+        return str(self.verification_code_lvl_1)
 
     def setVerificationCode1(self, code):
         self.verification_code_lvl_1 = code;
 
     def getVerificationCode2(self):
-        return self.verification_code_lvl_2
+        return str(self.verification_code_lvl_2)
 
     def setVerificationCode2(self, code):
         self.verification_code_lvl_2 = code;
 
     def getAddress(self):
-        return self.address
+        print(self.address)
+        return (self.address)
 
     def setAddress(self,address):
         self.address = address
@@ -89,7 +90,8 @@ class UserProfile(models.Model):
         self.url = url
 
     def getUrl(self):
-        return self.url
+        print(self.url)
+        return (self.url)
 
     def isAuthenticated1(self):
         return self.auth1

@@ -1,0 +1,62 @@
+{% extends "main_web_portal/blueprint.html" %}
+{% load staticfiles %}
+
+{% block body_block %}
+
+<h1 class="display-4" align="center"><br></h1>
+<link rel="stylesheet/less" type="text/css" href="{% static 'dashboard-style.less' %}" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.0.0/less.min.js" ></script>
+<script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="{% static 'viewcert.css' %}">
+<script src="{% static 'web3.min.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+<div class="container">
+
+  {% if NA %}
+    <h1 align="center">Error: Profile does not exist</h1>
+  {% else %}
+    <div class="profile-header">
+      <h1 align="center">{{username}}</h1>
+    </div>
+
+    <hr style="border: 1px solid black">
+    <div align="center"><img class = "user-img" src= '{{profile_pic}}' alt="" height="250" width="250" align="center"></div>
+
+    <hr style="border: 1px solid black">
+    <div class="landing_page">
+      <div class="table-responsive">
+        <table class="table table-bordered">
+
+          <tr>
+            <th scope="row">Ethereum Address</th>
+            <td id="receiverAddress">{{ethAddress}}</td>
+          </tr>
+
+          <tr>
+            <th scope="row">Level 1 authentication</th>
+            <td id="senderAddress">{{isAuth1}}</td>
+          </tr>
+
+          <tr>
+            <th scope="row">Level 2 authentication</th>
+            <td id="senderProof">{{isAuth2}}</td>
+          </tr>
+
+          <tr>
+            <th scope="row">Address</th>
+            <td id="senderProof">{{address}}</td>
+          </tr>
+
+          <tr>
+            <th scope="row">Website / URL</th>
+            <td id="senderProof">{{url}}</td>
+          </tr>
+
+        </table>
+      </div>
+    </div>
+  {% endif %}
+</div>
+
+{% endblock %}
