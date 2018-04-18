@@ -29,10 +29,10 @@ def fetch_certificates():
     # read abi
     PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
     with open(os.path.join(PROJECT_ROOT, 'abi.json'), 'r') as f:
-	    abi_c = json.load(f)
+        abi_c = json.load(f)
 
     # instantiate contract
-    contract = w3.eth.contract(address= contract_address, abi= abi_c)   
+    contract = w3.eth.contract(address= contract_address, abi= abi_c)
 
     # we are indexed at 1
     count = 1
@@ -62,7 +62,7 @@ def fetch_certificates():
             # check if the field exists if so pass
             Certificate.objects.get(certificate_id=count)
 
-        except:      
+        except:
             Certificate.objects.create(certificate_id = count,
                                        receiver_address = rec_ad,
                                        receiver_proof = rec_pf,
