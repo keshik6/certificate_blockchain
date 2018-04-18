@@ -8,6 +8,7 @@ from django.db.models import Max
 
 from web3 import Web3, HTTPProvider
 from background_tasks.models import Certificate
+from main_web_portal.models import User, UserProfile
 
 # import web3.middleware geth_poa_middleware to handle rinkeby POA
 from web3.middleware import geth_poa_middleware
@@ -15,6 +16,10 @@ from web3.middleware import geth_poa_middleware
 
 @task
 def fetch_certificates():
+    """
+    Updates the Certificate model with the latest transactions found in the
+    blockchain
+    """
     # for web3
     # to change this if we are to switch to mainnet
     provider = HTTPProvider('https://rinkeby.infura.io/JRIhcMSUX50sCH9PKk6b')
@@ -34,8 +39,8 @@ def fetch_certificates():
     # instantiate contract
     contract = w3.eth.contract(address= contract_address, abi= abi_c)
 
-    # we are indexed at 1
-    count = 1
+    # we are indexed at 0
+    count = 0
 
     # try to get highest count from db and + 1
     try:
@@ -75,3 +80,35 @@ def fetch_certificates():
         count += 1
 
 
+@task
+def update_sent_cert():
+    """
+    update user model with sent certificates based on the Certificate model
+    """
+    users = UserProfile.objects.all()
+    certs = Certificate.objects.all()
+    for user in users:
+        for cert in certs:
+            if cert.getSenderAddress() == user.getEthAddress():
+                try:
+                    user.sent_certificates.add(cert)
+                    user.save()
+                except:
+                    continue
+
+
+@task
+def update_received_cert():
+    """
+    update user model with received certificates based on the Certificate model
+    """
+    users = UserProfile.objects.all()
+    certs = Certificate.objects.all()
+    for user in users:
+        for cert in certs:
+            if cert.getReceiverAddress() == user.getEthAddress():
+                try:
+                    user.received_certificates.add(cert)
+                    user.save()
+                except:
+                    continue

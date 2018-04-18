@@ -10,3 +10,13 @@ class Certificate(models.Model):
     description = models.CharField(max_length= 500)
     create_time = models.IntegerField()
 
+    def __str__(self):
+        return str(self.certificate_id)
+
+    def getSenderAddress(self):
+        return self.sender_address
+
+    def getReceiverAddress(self):
+        return self.receiver_address
+
+

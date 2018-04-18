@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from background_tasks.models import Certificate
 
 # Create your models here.
 class UserProfile(models.Model):
@@ -15,8 +16,7 @@ class UserProfile(models.Model):
 
     # field for lvl1 verification code
     verification_code_lvl_1 = models.CharField(default="", max_length = 64)
-
-    # field for lvl2 verification code
+# field for lvl2 verification code
     verification_code_lvl_2 = models.CharField(default="",max_length = 64)
 
     # address
@@ -31,6 +31,15 @@ class UserProfile(models.Model):
 
     #Ethereum address
     eth_address = models.CharField(default="Not Setup",max_length = 64)
+
+    # Certificates
+    sent_certificates = models.ManyToManyField(Certificate,
+                                               related_name="sent_certificates",
+                                               blank=True)
+
+    received_certificates = models.ManyToManyField(Certificate,
+                                                   related_name="received_certificates",
+                                                   blank=True)
 
     def __str__(self):
         # Built-in attribute of django.contrib.auth.models.User !
@@ -79,3 +88,8 @@ class UserProfile(models.Model):
 
     def getEthAddress(self):
         return self.eth_address
+
+    # Meta class to configure options
+    # https://docs.djangoproject.com/en/1.11/ref/models/options/
+    class Meta:
+        managed = True
