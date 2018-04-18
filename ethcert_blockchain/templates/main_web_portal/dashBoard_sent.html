@@ -1,0 +1,23 @@
+{% extends "main_web_portal/dashBoard_template.html" %}
+{% load staticfiles %}
+
+{% block dashboard_content %}
+    <link rel="stylesheet" href="{%static 'multi_step_register.css'%}">
+    <section id="content-area">
+      <div class="cards" align="center">
+      <div class="col-md-12">
+        <div class="card-header">
+          <div class="heading" align="center">
+            <h1>Sent Certificates</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+        var profile = document.getElementById("dashboard_profile").classList.remove("active");
+        var sent = document.getElementById("dashboard_sent").classList.add("active");
+        var rec = document.getElementById("dashboard_received").classList.remove("active");
+    </script>
+
+{% endblock dashboard_content %}

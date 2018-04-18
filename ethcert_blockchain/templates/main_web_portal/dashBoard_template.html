@@ -1,0 +1,23 @@
+{% extends "main_web_portal/blueprint.html" %}
+{% load staticfiles %}
+{ % load MEDIA_URL %}
+
+{% block body_block %}
+  <h1 class="display-4" align="center"><br></h1>
+  <link rel="stylesheet/less" type="text/css" href="{% static 'dashboard-style.less' %}" />
+  <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.0.0/less.min.js" ></script>
+  <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+  <div class="wrapper">
+    <section id="sideBar">
+      <nav>
+        <a id="dashboard_profile" href="{% url 'main_web_portal:dashboard' %}"><i id="dbIcon" class="fas fa-user" ></i>Profile</a>
+        <a id="dashboard_sent" href="{% url 'main_web_portal:dashboard_sent' %}"><i id="dbIcon" class="fas fa-rocket"></i>Sent Certificates</a>
+        <a id="dashboard_received" href="{% url 'main_web_portal:dashboard_received' %}"><i id="dbIcon" class="fas fa-archive"></i>Received Certificates</a>
+      </nav>
+    </section>
+   
+    {% block dashboard_content %}
+    {% endblock dashboard_content %}
+
+
+{% endblock body_block %}

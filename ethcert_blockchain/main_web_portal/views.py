@@ -191,7 +191,7 @@ def view_cert(request):
 
 @login_required
 def dashboard(request):
-    User = request.user;
+    User = request.user
     context = getUserContext(User)
 
     if request.method == 'POST':
@@ -206,6 +206,22 @@ def dashboard(request):
         print("done")
 
     return render(request, 'main_web_portal/dashBoard.html', context)
+
+
+@login_required
+def dashboard_sent(request):
+    User = request.user
+    context = getUserContext(User)
+
+    return render(request, 'main_web_portal/dashBoard_sent.html', context)
+
+
+@login_required
+def dashboard_received(request):
+    User = request.user
+    context = getUserContext(User)
+
+    return render(request, 'main_web_portal/dashBoard_received.html', context)
 
 
 def handler404(request):
