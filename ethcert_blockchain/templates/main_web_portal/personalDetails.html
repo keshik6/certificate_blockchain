@@ -7,21 +7,15 @@
   <form id="msform" method="post">
     {% csrf_token %}
     <fieldset>
-      <h2 class="fs-title">Enter Email Code</h2>
-      <input class= "formInput" type="text" name="authCode1" placeholder="Code"><br>
+      <h2 class="fs-title">Enter Personal Details</h2>
+      <input class= "formInput" type="text" name="address" placeholder="Address"><br>
       <br>
+
+      <input class= "formInput" type="text" name="websiteUrl" placeholder="Website/Blog URL"><br>
+      <br>
+
       <input type="submit" name="" value="Verify" class="submit action-button">
     </fieldset>
   </form>
-
-  <div class="container">
-    {% for message in messages %}
-          <div class="alert alert-danger">
-              <a class="close" href="#" data-dismiss="alert">×</a>
-              {{ message }}
-          </div>
-    {% endfor %}
-  </div>
-
 
 {% endblock %}

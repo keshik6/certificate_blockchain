@@ -71,6 +71,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -142,7 +143,7 @@ EMAIL_HOST_USER = 'ethcertio@gmail.com' #my gmail username
 EMAIL_PORT = 587
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-# Celery 
+# Celery
 CELERY_BROKER_URL = 'redis://localhost:8888'
 CELERY_RESULT_BACKEND = 'redis://localhost:8888'
 CELERY_ACCEPT_CONTENT = ['application/json']

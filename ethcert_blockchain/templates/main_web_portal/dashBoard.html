@@ -1,5 +1,6 @@
 {% extends "main_web_portal/blueprint.html" %}
 {% load staticfiles %}
+{ % load MEDIA_URL %}
 
 {% block body_block %}
   <h1 class="display-4" align="center"><br></h1>
@@ -32,18 +33,20 @@
           <div class="card">
             <span class="card-title">Profile Summary</span>
             <hr>
-            <div class="user-img"></div>
+            <img class="user-img" src= '{{profile_pic}}' alt="">
             <hr>
             <span class="user-name">{{username}}</span>
             <span class="user-email">Email : {{email}}</span>
 	          <span class="user-email">Saved Ethereum Account: {{ethAddress}}</span>
 	          <span id="ethaddr" class="user-email">Current Ethereum Account: </span>
 						<br>
-						<form method="post">
+
+
+            <form method="post">
 							{% csrf_token %}
-							<fieldset>
+              <fieldset>
 								<input id="ethaddrinput" name="ethAddrInput" type="hidden"><br>
-								<input type="submit" name="" value="Update Eth Address" class="btn btn-success">
+								<input type="submit" name="" value="Update Ethereum Address" class="btn btn-success">
 							</fieldset>
 						</form>
           </div>
@@ -90,10 +93,63 @@
               </a>
               <br>
             {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <br>
+    <br>
+
+    <div class="cards" align="center">
+      <div class="col-md-12">
+        <div class="card-header">
+          <div class="heading" align="center">
+            <h1>ACTIONS</h1>
           </div>
         </div>
       </div>
+    </div>
+
+      <div class="col-md-4">
+        <div class="cards" align="center">
+            <div class="card-header">
+              <div class="heading" align="center">
+                <h1>Update Profile Pic</h1>
+                <hr>
+              </div>
+
+            <form enctype="multipart/form-data" method="POST" action="{% url 'main_web_portal:updatePic' %}">
+                {% csrf_token %}
+                {% for field in picForm %}
+                    <div class="fieldWrapper">
+                        <div class="formInput">
+                        {{ field }}
+                        </div>
+                    </div>
+                    <br>
+                {% endfor %}
+                <input type="submit" name="" class="btn btn-success" value="Change Pic">
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="cards" align="center">
+            <div class="card-header">
+              <div class="heading" align="center">
+                <h1>Update Personal Details</h1>
+                <hr>
+              </div>
+              <a href="getDetails">
+                <button  type="button" name="" class="btn btn-success">Update</button>
+              </a>
+          </div>
+        </div>
+      </div>
+
     </section>
+
   </div>
 
 	<script>
@@ -108,13 +164,13 @@
             	web3.eth.defaultAccount = web3.eth.accounts[0];
 							document.getElementById("ethaddr").innerHTML = "Current Ethereum Account: " + web3.eth.accounts[0].toString();
 							document.getElementById("ethaddrinput").value = web3.eth.accounts[0].toString();
-														
-           	} 
+
+           	}
           } else {
           	// fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
           	window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
           }
-			 }	
+			 }
 		});
 	</script>
 

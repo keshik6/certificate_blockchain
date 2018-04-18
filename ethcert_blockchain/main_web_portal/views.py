@@ -11,7 +11,7 @@ from django.shortcuts import render, render_to_response
 from django.template import RequestContext
 from faker import Faker
 from main_web_portal.models import UserProfile
-
+from django.contrib.auth.models import User
 
 # Create your views here.
 def index(request):
@@ -30,6 +30,15 @@ def register(request):
     registered = False
 
     if request.method == 'POST':
+        password = request.POST.get('password')
+        confirmPassword = request.POST.get('passwordConfirm')
+        if (password != confirmPassword):
+            messages.error(request, 'Passwords do not match')
+            user_form = UserForm()
+            return render(request,'main_web_portal/registration.html',
+                                  {'user_form':user_form,
+                                   'registered':registered})
+
         # Get info from "both" forms
         # It appears as one form to the user on the .html page
 
@@ -63,7 +72,7 @@ def register(request):
             #     print('found it')
             #     # If yes, then grab it from the POST form reply
             #     profile.profile_pic = request.FILES['profile_pic']
-            profile.profile_pic = "{% static 'blk-new.jpg' %}"
+            profile.profile_pic = "profile_pics/default-profile-pic.jpg"
 
             fakeGenerator = Faker()
             vercode1 = fakeGenerator.bban()
@@ -157,20 +166,41 @@ def view_cert(request):
     if request.method == 'POST':
         # handle empty fields in javascript
         search_query = request.POST.get('searchtext')
-        print("clicked, searching {}".format(search_query))
-        return render(request, 'main_web_portal/viewCertificate.html',
-                      {"certID": search_query})
+        print(representsInt(search_query))
+        if (representsInt(search_query)):
+            print("clicked, searching {}".format(search_query))
+            return render(request, 'main_web_portal/viewCertificate.html',
+                          {"certID": search_query})
+
+        else:
+            print("clicked, searching profile{}".format(search_query))
+            userObject= User.objects.filter(username = search_query)
+            print(userObject.count())
+            if (userObject.count() != 0):
+                print("user found: " + str(userObject[0]))
+                profile = UserProfile.objects.filter(user = userObject[0])[0]
+                print("hello" + str(profile))
+                context = getUserContext(userObject[0])
+                context['NA'] = False
+                return render(request,'main_web_portal/publicProfile.html',context)
+
+            else:
+                context = dict()
+                context['NA'] = True
+                return render(request,'main_web_portal/publicProfile.html',context)
 
 @login_required
 def dashboard(request):
     User = request.user;
     context = getUserContext(User)
-    
+
     if request.method == 'POST':
         profile = UserProfile.objects.filter(user = User)[0]
         code = request.POST.get('ethAddrInput')
         print(code)
-        profile.setEthAddress(code)
+        if (code != None):
+            profile.setEthAddress(code)
+
         profile.save()
         User.save()
         print("done")
@@ -185,18 +215,25 @@ def handler404(request):
 def handler500(request):
     return render(request, 'main_web_portal/500.html', status= 500)
 
+
 def getUserContext(User):
     profileList = UserProfile.objects.filter(user = User)
     profile = profileList[0]
     #print(profile.isAuthenticated1())
+    picForm = UserProfileInfoForm()
     context = {'username' : profile.user.username,
     'isAuth1': profile.isAuthenticated1(),
     'isAuth2': profile.isAuthenticated2(),
     'email': profile.user.email,
-    'profile_pic': profile.profile_pic,
-    'ethAddress': profile.getEthAddress()}
+    'profile_pic': profile.profile_pic.url,
+    'ethAddress': profile.getEthAddress(),
+    'picForm':picForm,
+    'address':profile.getAddress(),
+    'url': profile.getUrl()}
     return context;
 
+
+@login_required
 def authForm1(request):
     if request.method == 'POST':
         User = request.user
@@ -208,7 +245,6 @@ def authForm1(request):
             profile.setAuthenticated1()
             profile.save()
             User.save()
-            print("done")
             return dashboard(request)
         else:
             messages.error(request, 'Email Verification code incorrect')
@@ -217,9 +253,9 @@ def authForm1(request):
         return render (request,'main_web_portal/authlvl1.html',{})
 
 
+@login_required
 def authForm2(request):
     if request.method == 'POST':
-        print('posting')
         User = request.user
         profile = UserProfile.objects.filter(user = User)[0]
         code = request.POST.get('authCode2')
@@ -233,3 +269,47 @@ def authForm2(request):
             return render (request,'main_web_portal/authlvl2.html',{})
     else:
         return render (request,'main_web_portal/authlvl2.html',{})
+
+@login_required
+def personalDetails(request):
+    if request.method == 'POST':
+        User = request.user
+        profile = UserProfile.objects.filter(user = User)[0]
+
+        address = request.POST.get('address')
+        websiteUrl = request.POST.get('websiteUrl')
+
+        profile.setAddress(address)
+        profile.setUrl(websiteUrl)
+        profile.save()
+        User.save()
+        return dashboard(request)
+
+    return render (request,'main_web_portal/personalDetails.html',{})
+
+
+@login_required
+def updateProfilePic(request):
+    if request.method == 'POST':
+        picForm = UserProfileInfoForm(data = request.POST)
+
+        User = request.user
+        profile = UserProfile.objects.filter(user = User)[0]
+
+        if 'profile_pic' in request.FILES:
+                print('found it')
+                # If yes, then grab it from the POST form reply
+                profile.profile_pic = request.FILES['profile_pic']
+
+                # Now save model
+                profile.save()
+                User.save()
+
+    return dashboard(request)
+
+def representsInt(s):
+    try:
+        int(s)
+        return True
+    except ValueError:
+        return False
