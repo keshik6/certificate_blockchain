@@ -28,7 +28,7 @@
         </div>
 
         <div class="tbl-content">
-          <table cellpadding="0" cellspacing="0" border="0">
+          <table id="tableid" cellpadding="0" cellspacing="0" border="0">
             <tbody>
               {% for cert in sent_certificates reversed %}
               <tr class="cert_row">
@@ -39,6 +39,7 @@
               </tr>
               {% endfor %}
 
+            </tbody>
         </div>        
       </div>
       </div>
@@ -49,11 +50,49 @@
         var sent = document.getElementById("dashboard_sent").classList.add("active");
         var rec = document.getElementById("dashboard_received").classList.remove("active");
 
+        function addRowHandlers() {
+          var table = document.getElementById("tableid");
+          var rows = table.getElementsByTagName("tr");
+          for (i = 0; i < rows.length; i++) {
+              var currentRow = table.rows[i];
+              var createClickHandler = 
+                  function(row) 
+                  {
+                    return function() { 
+                      var cell = row.getElementsByTagName("td")[0];
+                      var id = cell.innerHTML;
 
-        $(window).on("load resize ", function() {
-          var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
-          $('.tbl-header').css({'padding-right':scrollWidth});
-        }).resize();
+                      // submit hidden form
+                      method = "post";
+                      var form = document.createElement("form");
+                      form.setAttribute("method", method);
+                      form.setAttribute("action", "{% url 'main_web_portal:view_cert' %}");
+                      
+                      // csrf token
+                      var csrftoken = document.createElement("input");
+                      csrftoken.setAttribute("type", "hidden");
+                      csrftoken.setAttribute("name", "csrfmiddlewaretoken");
+                      csrftoken.setAttribute("value", "{{ csrf_token }}");                      
+                     
+                      // cert id
+                      var hiddenField = document.createElement("input");
+                      hiddenField.setAttribute("type", "hidden");
+                      hiddenField.setAttribute("name", "searchtext");
+                      hiddenField.setAttribute("value", id);
+                      
+                      // submit
+                      form.appendChild(csrftoken);
+                      form.appendChild(hiddenField);
+                      document.body.appendChild(form);
+                      form.submit();                                              
+                    };
+                  };
+
+              currentRow.onclick = createClickHandler(currentRow);
+          }
+      }
+      window.onload = addRowHandlers();
+
     </script>
 
 {% endblock dashboard_content %}

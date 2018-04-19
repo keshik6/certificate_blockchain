@@ -50,7 +50,7 @@
         <form class="navbar-form navbar-right search-bar" height="20px" method="post" action="{% url 'main_web_portal:view_cert' %}">
           {% csrf_token %}
           <div class="form-group">
-            <input id="searchtext" name="searchtext" type="text" class="form-control" placeholder="Search CertID or Username">
+            <input id="searchtext" name="searchtext" type="text" class="form-control" placeholder="Enter Cert ID or Username">
           </div>
         <button id="searchbutton" name="searchbutton" type="submit" class="btn btn-default search-btn">Search</button>
         </form>

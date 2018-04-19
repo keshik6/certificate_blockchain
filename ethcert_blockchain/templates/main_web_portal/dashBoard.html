@@ -47,11 +47,11 @@
                   {% csrf_token %}
                   {% for field in picForm %}
                       <div class="fieldWrapper">
-                          <div class="formInput">
+                          <div class="formInput"">
                           {{ field }}
                           </div>
                       </div>
-                      <br>
+                      <br><br><br>
                   {% endfor %}
                   <input type="submit" name="" class="btn btn-success" value="Change Pic">
               </form>
@@ -60,9 +60,11 @@
             <div style="height:56%;">
               <span class="card-title">Update Profile Details</span>
               <hr>
-              <a href="{% url 'main_web_portal:personalDetails' %}">
-                <button  type="button" name="" class="btn btn-success">Update</button>
-              </a>
+              <div style="margin:120px;">
+                <a href="{% url 'main_web_portal:personalDetails' %}">
+                  <button  type="button" name="" class="btn btn-success">Update</button>
+                </a>
+              </div>
             </div>         
             
           </div>
