@@ -3,6 +3,7 @@
 
 {% block dashboard_content %}
     <link rel="stylesheet" href="{%static 'multi_step_register.css'%}">
+    <link rel="stylesheet" href="{%static 'cert_table.css'%}">
     <section id="content-area">
       <div class="cards" align="center">
       <div class="col-md-12">
@@ -11,6 +12,35 @@
             <h1>Received Certificates</h1>
           </div>
         </div>
+
+        <section>
+        <div class="tbl-header">
+          <table cellpadding="0" cellspacing="0" border="0">
+            <thead>
+              <tr>
+                <th class="cert_header">ID</th>
+                <th class="cert_header">Sender Address</th>
+                <th class="cert_header">Receiver Address</th>
+                <th class="cert_header">Create Time</th> 
+              </tr>
+            </thead>
+          </table>
+        </div>
+
+        <div class="tbl-content">
+          <table cellpadding="0" cellspacing="0" border="0">
+            <tbody>
+              {% for cert in received_certificates reversed %}
+              <tr class="cert_row">
+                <td class="cert_data">{{cert.certificate_id}}</td>
+                <td class="cert_data">{{cert.sender_address}}</td>
+                <td class="cert_data">{{cert.receiver_address}}</td>
+                <td class="cert_data">{{cert.create_time}}</td>
+              </tr>
+              {% endfor %}
+
+        </div>        
+      </div>
       </div>
     </div>
 
@@ -18,6 +48,12 @@
         var profile = document.getElementById("dashboard_profile").classList.remove("active");
         var sent = document.getElementById("dashboard_sent").classList.remove("active");
         var rec = document.getElementById("dashboard_received").classList.add("active");
+
+
+        $(window).on("load resize ", function() {
+          var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+          $('.tbl-header').css({'padding-right':scrollWidth});
+        }).resize();
     </script>
 
 {% endblock dashboard_content %}

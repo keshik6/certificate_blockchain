@@ -1,6 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
 from background_tasks.models import Certificate
+import time, os
+
+# Use Singapore timezone
+os.environ['TZ'] = 'Asia/Singapore'
+time.tzset()
 
 # Create your models here.
 class UserProfile(models.Model):
@@ -96,12 +101,14 @@ class UserProfile(models.Model):
         for cert in certs:
             data = {}
             data['certificate_id'] = cert.certificate_id
-            data['receiver_address'] = cert.getReceiverAddress()
-            data['receiver_proof'] = cert.receiver_proof
             data['sender_address'] = cert.getSenderAddress()
             data['sender_proof'] = cert.sender_proof
+            data['receiver_address'] = cert.getReceiverAddress()
+            data['receiver_proof'] = cert.receiver_proof
             data['description'] = cert.description
-            data['create_time'] = cert.create_time
+            int_time = cert.create_time
+            data['create_time'] = time.strftime('%A %b %d %Y %H:%M:%S GMT%Z',
+                                                time.localtime(int_time))
 
             output.append(data)
 
@@ -114,12 +121,14 @@ class UserProfile(models.Model):
         for cert in certs:
             data = {}
             data['certificate_id'] = cert.certificate_id
-            data['receiver_address'] = cert.getReceiverAddress()
-            data['receiver_proof'] = cert.receiver_proof
             data['sender_address'] = cert.getSenderAddress()
             data['sender_proof'] = cert.sender_proof
+            data['receiver_address'] = cert.getReceiverAddress()
+            data['receiver_proof'] = cert.receiver_proof
             data['description'] = cert.description
-            data['create_time'] = cert.create_time
+            int_time = cert.create_time
+            data['create_time'] = time.strftime('%A %b %d %Y %H:%M:%S GMT%Z',
+                                                time.localtime(int_time))
 
             output.append(data)
 
