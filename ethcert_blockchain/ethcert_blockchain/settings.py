@@ -157,10 +157,10 @@ CELERY_BEAT_SCHEDULE = {
     },
     'update-sent-cert': {
         'task': 'background_tasks.tasks.update_sent_cert',
-        'schedule': 30,
+        'schedule': 60,
     },
     'update-received-cert': {
         'task': 'background_tasks.tasks.update_received_cert',
-        'schedule': 30,
+        'schedule': 70,
     },
 }

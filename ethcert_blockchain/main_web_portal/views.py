@@ -80,12 +80,13 @@ def register(request):
             print("Profile auth code 1 is : " + vercode1)
 
             vercode2 = fakeGenerator.bban()
-            print("Profile auth code 1 is : " + vercode2)
+            print("Profile auth code 2 is : " + vercode2)
 
             profile.setVerificationCode1(vercode1)
             profile.setVerificationCode2(vercode2)
             print('Successfully registered')
-            print("get profiles verification code " + profile.getVerificationCode1())
+            print("Get Verification Code 2: " + profile.getVerificationCode1())
+            print("Get Verification Code 1: " + profile.getVerificationCode2())
 
             profile.save()
             # Registration Successful!
