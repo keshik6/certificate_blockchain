@@ -7,49 +7,48 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 
       <div class="container">
-        <div class="landing_page">
+        <div class="landing_page"> 
           <h1 class="display-4" align="center"><br></h1>
 					<h1>Certificate Details</h1>
-					<!-- for user accessibility should we have a web3 in the server instead? -->
 					<h2 id="detect">Awaiting Web3 Socket</h2>
 					<div id="alert" class="alert alert-danger" style="display: none;">
 						<p>Certificate does not exist</p>
 					</div>
           <div class="table-responsive">
-						<table class="table table-bordered">
+						<table class="table">
 							<tr>
 								<th scope="row">Certificate ID</th>
-								<td id="certID">{{ certID }}</td>
+								<td class="tdstyle" id="certID">{{ certID }}</td>
 							</tr>
 
 							<tr>
 								<th scope="row">Sender Address</th>
-								<td id="senderAddress"></td>
+								<td class="tdstyle" id="senderAddress"></td>
 							</tr>
 
 							<tr>
 								<th scope="row">Sender Proof</th>
-								<td id="senderProof"></td>
+								<td class="tdstyle" id="senderProof"></td>
 							</tr>
 
 							<tr>
 								<th scope="row">Receiver Address</th>
-								<td id="receiverAddress"></td>
+								<td class="tdstyle" id="receiverAddress"></td>
 							</tr>
 
 							<tr>
 								<th scope="row">Receiver Proof</th>
-								<td id="receiverProof"></td>
+								<td class="tdstyle" id="receiverProof"></td>
 							</tr>
 
 							<tr>
 								<th scope="row">Description</th>
-								<td id="description"></td>
+								<td class="tdstyle" id="description"></td>
 							</tr>
 
 							<tr>
 								<th scope="row">Creation Time</th>
-								<td id="createTime"></td>
+								<td class="tdstyle" id="createTime"></td>
 							</tr>
 						</table>
         </div>
