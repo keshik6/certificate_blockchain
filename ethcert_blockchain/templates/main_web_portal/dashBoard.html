@@ -5,14 +5,14 @@
     <link rel="stylesheet" href="{%static 'multi_step_register.css'%}">
     <section id="content-area">
       <div class="cards" align="center">
-      <div class="col-md-12">
-        <div class="card-header">
-          <div class="heading" align="center">
-            <h1>Dashboard</h1>
+        <div class="col-md-12">
+          <div class="card-header">
+            <div class="heading" align="center">
+              <h1>Dashboard</h1>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
       <div class="cards" align="center">
         <div class="col-md-4">
@@ -43,7 +43,34 @@
 
         <div class="col-md-4">
           <div class="card">
-            <span class="card-title">Single-Factor Authentication</span>
+            <span class="card-title">Update Profile Pic</span>
+            <hr>
+            <form enctype="multipart/form-data" method="POST" action="{% url 'main_web_portal:updatePic' %}">
+                {% csrf_token %}
+                {% for field in picForm %}
+                    <div class="fieldWrapper">
+                        <div class="formInput">
+                        {{ field }}
+                        </div>
+                    </div>
+                    <br>
+                {% endfor %}
+                <input type="submit" name="" class="btn btn-success" value="Change Pic">
+            </form>
+
+            <br><br><br><br><br><br><br>
+            <span class="card-title">Update Profile Details</span>
+            <hr>
+            <a href="{% url 'main_web_portal:personalDetails' %}">
+              <button  type="button" name="" class="btn btn-success">Update</button>
+            </a>         
+            
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card">
+            <span class="card-title">Email Authentication</span>
             <hr>
             {% if isAuth1 %}
               <div align="center">
@@ -60,12 +87,9 @@
               </a>
               <br>
             {% endif %}
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="card">
-            <span class="card-title">Two-Factor Authentication</span>
+            
+            <br><br><br><br><br>
+            <span class="card-title">Physical Address Authentication</span>
             <hr>
             {% if isAuth2 %}
               <div align="center">
@@ -82,61 +106,10 @@
               </a>
               <br>
             {% endif %}
-        </div>
-      </div>
-    </div>
-
-    <br>
-    <br>
-
-    <div class="cards" align="center">
-      <div class="col-md-12">
-        <div class="card-header">
-          <div class="heading" align="center">
-            <h1>ACTIONS</h1>
           </div>
         </div>
       </div>
     </div>
-
-      <div class="col-md-4">
-        <div class="cards" align="center">
-            <div class="card-header">
-              <div class="heading" align="center">
-                <h1>Update Profile Pic</h1>
-                <hr>
-              </div>
-
-            <form enctype="multipart/form-data" method="POST" action="{% url 'main_web_portal:updatePic' %}">
-                {% csrf_token %}
-                {% for field in picForm %}
-                    <div class="fieldWrapper">
-                        <div class="formInput">
-                        {{ field }}
-                        </div>
-                    </div>
-                    <br>
-                {% endfor %}
-                <input type="submit" name="" class="btn btn-success" value="Change Pic">
-            </form>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="cards" align="center">
-            <div class="card-header">
-              <div class="heading" align="center">
-                <h1>Update Personal Details</h1>
-                <hr>
-              </div>
-              <a href="{% url 'main_web_portal:personalDetails' %}">
-                <button  type="button" name="" class="btn btn-success">Update</button>
-              </a>
-          </div>
-        </div>
-      </div>
-
     </section>
 
   </div>
