@@ -89,6 +89,43 @@ class UserProfile(models.Model):
     def getEthAddress(self):
         return self.eth_address
 
+    def getSentCertificates(self):
+        certs = self.sent_certificates.all()
+        output = []
+
+        for cert in certs:
+            data = {}
+            data['certificate_id'] = cert.certificate_id
+            data['receiver_address'] = cert.getReceiverAddress()
+            data['receiver_proof'] = cert.receiver_proof
+            data['sender_address'] = cert.getSenderAddress()
+            data['sender_proof'] = cert.sender_proof
+            data['description'] = cert.description
+            data['create_time'] = cert.create_time
+
+            output.append(data)
+
+        return output
+
+    def getReceivedCertificates(self):
+        certs = self.received_certificates.all()
+        output = []
+
+        for cert in certs:
+            data = {}
+            data['certificate_id'] = cert.certificate_id
+            data['receiver_address'] = cert.getReceiverAddress()
+            data['receiver_proof'] = cert.receiver_proof
+            data['sender_address'] = cert.getSenderAddress()
+            data['sender_proof'] = cert.sender_proof
+            data['description'] = cert.description
+            data['create_time'] = cert.create_time
+
+            output.append(data)
+
+        return output
+
+
     # Meta class to configure options
     # https://docs.djangoproject.com/en/1.11/ref/models/options/
     class Meta:

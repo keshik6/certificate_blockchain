@@ -240,15 +240,19 @@ def getUserContext(User):
     profile = profileList[0]
     #print(profile.isAuthenticated1())
     picForm = UserProfileInfoForm()
+
     context = {'username' : profile.user.username,
-    'isAuth1': profile.isAuthenticated1(),
-    'isAuth2': profile.isAuthenticated2(),
-    'email': profile.user.email,
-    'profile_pic': profile.profile_pic.url,
-    'ethAddress': profile.getEthAddress(),
-    'picForm':picForm,
-    'address':profile.getAddress(),
-    'url': profile.getUrl()}
+               'isAuth1': profile.isAuthenticated1(),
+               'isAuth2': profile.isAuthenticated2(),
+               'email': profile.user.email,
+               'profile_pic': profile.profile_pic.url,
+               'ethAddress': profile.getEthAddress(),
+               'picForm':picForm,
+               'address':profile.getAddress(),
+               'url': profile.getUrl(),
+               'sent_certificates': profile.sent_certificates,
+               'received_certificates': profile.received_certificates,
+              }
 
     return context
 
