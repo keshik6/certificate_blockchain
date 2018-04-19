@@ -23,6 +23,9 @@
             <hr>
             <span class="user-name">{{username}}</span>
             <span class="user-email">Email : {{email}}</span>
+            <span class="user-email">Url : {{url}}</span>
+            <span class="user-email">Address: {{url}}</span>
+            <br>
 	          <span class="user-email">Saved Ethereum Account: {{ethAddress}}</span>
 	          <span id="ethaddr" class="user-email">Current Ethereum Account: </span>
 						<br>
@@ -127,7 +130,7 @@
                 <h1>Update Personal Details</h1>
                 <hr>
               </div>
-              <a href="getDetails">
+              <a href="{% url 'main_web_portal:personalDetails' %}">
                 <button  type="button" name="" class="btn btn-success">Update</button>
               </a>
           </div>

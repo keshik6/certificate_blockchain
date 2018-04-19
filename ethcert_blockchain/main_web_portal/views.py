@@ -142,9 +142,8 @@ def user_login(request):
                 # If account is not active:
                 return HttpResponse("Your account is not active.")
         else:
-            # This seems to be a vulnerability
             print("Someone tried to login and failed.")
-            # print("They used username: {} and password: {}".format(username,password))
+            print("They used username: {} and password: {}".format(username,password))
             messages.error(request, 'Username or Password not correct')
             return render(request, 'main_web_portal/login.html', {})
 
@@ -201,9 +200,13 @@ def dashboard(request):
         if (code != None):
             profile.setEthAddress(code)
 
-        profile.save()
-        User.save()
-        print("done")
+        try:
+            profile.save()
+            User.save()
+            print("done")
+        except:
+            print("error")
+            pass
 
     return render(request, 'main_web_portal/dashBoard.html', context)
 
@@ -246,7 +249,8 @@ def getUserContext(User):
     'picForm':picForm,
     'address':profile.getAddress(),
     'url': profile.getUrl()}
-    return context;
+
+    return context
 
 
 @login_required
@@ -285,6 +289,7 @@ def authForm2(request):
             return render (request,'main_web_portal/authlvl2.html',{})
     else:
         return render (request,'main_web_portal/authlvl2.html',{})
+
 
 @login_required
 def personalDetails(request):
