@@ -13,6 +13,7 @@ from faker import Faker
 from main_web_portal.models import UserProfile
 from django.contrib.auth.models import User
 
+
 # Create your views here.
 def index(request):
     return render(request, "main_web_portal/index.html")
@@ -137,7 +138,7 @@ def user_login(request):
                 # Send the user back to some page.
                 # In this case their homepage.
                 context = getUserContext(User)
-                return render(request, 'main_web_portal/dashBoard.html', context)
+                return dashboard(request)
             else:
                 # If account is not active:
                 return HttpResponse("Your account is not active.")
@@ -189,25 +190,11 @@ def view_cert(request):
                 return render(request,'main_web_portal/publicProfile.html',context)
 
 
+@login_required
 def dashboard(request):
     User = request.user
     context = getUserContext(User)
-
-    if request.method == 'POST':
-        profile = UserProfile.objects.filter(user = User)[0]
-        code = request.POST.get('ethAddrInput')
-        print(code)
-        if (code != None):
-            profile.setEthAddress(code)
-
-        try:
-            profile.save()
-            User.save()
-            print("done")
-        except:
-            print("error")
-            pass
-
+    print("getting ethereum address: " + context['ethAddress'])
     return render(request, 'main_web_portal/dashBoard.html', context)
 
 
@@ -338,3 +325,24 @@ def representsInt(s):
         return True
     except ValueError:
         return False
+
+def updateEthAddress(request):
+    User = request.user
+    context = getUserContext(User)
+
+    if request.method == 'POST':
+        profile = UserProfile.objects.filter(user = User)[0]
+        code = request.POST.get('ethAddrInput')
+
+        if (code != None):
+            profile.setEthAddress(code)
+
+        try:
+            profile.save()
+            User.save()
+            print("done")
+        except:
+            print("error")
+            pass
+
+    return dashboard(request)

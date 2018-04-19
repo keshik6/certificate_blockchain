@@ -28,7 +28,7 @@
 	          <span class="user-email">Saved Ethereum Account: {{ethAddress}}</span>
 	          <span id="ethaddr" class="user-email">Current Ethereum Account: </span>
 
-            <form method="post">
+            <form enctype="multipart/form-data" method="POST" action="{% url 'main_web_portal:updateEthAddress' %}">
 							{% csrf_token %}
               <fieldset>
 								<input id="ethaddrinput" name="ethAddrInput" type="hidden"><br>
@@ -47,7 +47,7 @@
                   {% csrf_token %}
                   {% for field in picForm %}
                       <div class="fieldWrapper">
-                          <div class="formInput"">
+                          <div class="formInput">
                           {{ field }}
                           </div>
                       </div>
@@ -65,8 +65,8 @@
                   <button  type="button" name="" class="btn btn-success">Update</button>
                 </a>
               </div>
-            </div>         
-            
+            </div>
+
           </div>
         </div>
 
@@ -91,7 +91,7 @@
                 <br>
               {% endif %}
             </div>
-            
+
             <div style="height:56%;">
               <span class="card-title">Physical Address Authentication</span>
               <hr>
@@ -103,6 +103,7 @@
               {% else %}
                 <div align="center">
                   <img src="https://icon-icons.com/icons2/1154/PNG/512/1486564399-close_81512.png" align="middle" height="72" width="72">
+                  <span class="user-email">Please email ethcertio@gmail.com for enquiries</span>
                 </div>
                 <br>
                 <a href="{% url 'main_web_portal:verify2' %}">
@@ -133,8 +134,8 @@
             	$("#sender_details").html("No Ethereum Account Detected. Make sure you are signed into Metamask" );
             } else {
             	web3.eth.defaultAccount = web3.eth.accounts[0];
+              document.getElementById("ethaddrinput").value = web3.eth.accounts[0].toString();
 							document.getElementById("ethaddr").innerHTML = "Current Ethereum Account: " + web3.eth.accounts[0].toString();
-							document.getElementById("ethaddrinput").value = web3.eth.accounts[0].toString();
 
            	}
           } else {

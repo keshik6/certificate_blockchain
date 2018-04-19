@@ -66,10 +66,10 @@ html {
 
 body {
   /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#2fcbe2+0,77c9d4+100 */
-  background: #1899ac; /* Old browsers */
-  background: -moz-linear-gradient(top, #1899ac 0%, #77c9d4 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(top, #1899ac 0%,#77c9d4 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to bottom, #1899ac 0%,#77c9d4 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  background: #10729d; /* Old browsers */
+  background: -moz-linear-gradient(top, #10729d 0%, #1987c4 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #10729d 0%,#1987c4 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #10729d 0%,#1987c4 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1899ac', endColorstr='#77c9d4',GradientType=0 ); /* IE6-9 */
 }
 
