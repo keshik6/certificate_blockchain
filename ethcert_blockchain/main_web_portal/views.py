@@ -188,7 +188,7 @@ def view_cert(request):
                 context['NA'] = True
                 return render(request,'main_web_portal/publicProfile.html',context)
 
-@login_required
+
 def dashboard(request):
     User = request.user
     context = getUserContext(User)
@@ -250,8 +250,8 @@ def getUserContext(User):
                'picForm':picForm,
                'address':profile.getAddress(),
                'url': profile.getUrl(),
-               'sent_certificates': profile.sent_certificates,
-               'received_certificates': profile.received_certificates,
+               'sent_certificates': profile.getSentCertificates(),
+               'received_certificates': profile.getReceivedCertificates(),
               }
 
     return context
