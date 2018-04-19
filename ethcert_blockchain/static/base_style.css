@@ -21,24 +21,24 @@
 }
 
 .navbar-brand{
-  color: #4E4E4E !important;
-  font-size: 26px !important;
+  color: #4E4E4E;
+  font-size: 26px;
   letter-spacing: 5px;
   font-family: 'Montserrat', sans-serif !important;
 }
 
 .search-bar{
-  color:#4E4E4E !important;
+  color:#4E4E4E;
   font-family: 'Montserrat', sans-serif !important;
 }
 
 .search-btn{
-  color: #4E4E4E !important;
+  color: #4E4E4E;
   font-family: 'Montserrat', sans-serif !important;
 }
 
 .search-btn:hover{
-  color: #FF3B3F !important;
+  color: #FF3B3F;
 }
 
 .icon-bar {
@@ -104,8 +104,16 @@ a:link {
   color: #FF7F44;
 }
 
+a:visited {
+  color: #8E8E8E;
+}
+
+a:active {
+  color: #FF3B3F;
+}
+
 a:hover {
-  color: #FF3B3F !important;
+  color: #FF3B3F;
 }
 
 .bgimg {
@@ -148,6 +156,17 @@ a:hover {
   justify-content: center;
 }
 
+p {
+  color: #EFEFEF;
+}
+
+h2 {
+  color: #EFEFEF;
+}
+
+h3 {
+  color: #EFEFEF;
+}
 .my-4{
   background-color: black !important;
   border-color: black !important;
