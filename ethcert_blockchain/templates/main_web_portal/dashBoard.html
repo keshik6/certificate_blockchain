@@ -20,7 +20,7 @@
             <span class="card-title">Profile Summary</span>
             <hr>
             <img class="user-img" src= '{{profile_pic}}' alt="">
-            <hr>
+            <br><br>
             <span class="user-name">{{username}}</span>
             <span class="user-email">Email : {{email}}</span>
             <span class="user-email">Url : {{url}}</span>
@@ -40,69 +40,75 @@
 
         <div class="col-md-4">
           <div class="card">
-            <span class="card-title">Update Profile Pic</span>
-            <hr>
-            <form enctype="multipart/form-data" method="POST" action="{% url 'main_web_portal:updatePic' %}">
-                {% csrf_token %}
-                {% for field in picForm %}
-                    <div class="fieldWrapper">
-                        <div class="formInput">
-                        {{ field }}
-                        </div>
-                    </div>
-                    <br>
-                {% endfor %}
-                <input type="submit" name="" class="btn btn-success" value="Change Pic">
-            </form>
+            <div style="height:44%;">
+              <span class="card-title">Update Profile Pic</span>
+              <hr>
+              <form enctype="multipart/form-data" method="POST" action="{% url 'main_web_portal:updatePic' %}">
+                  {% csrf_token %}
+                  {% for field in picForm %}
+                      <div class="fieldWrapper">
+                          <div class="formInput">
+                          {{ field }}
+                          </div>
+                      </div>
+                      <br>
+                  {% endfor %}
+                  <input type="submit" name="" class="btn btn-success" value="Change Pic">
+              </form>
+            </div>
 
-            <br><br><br><br><br><br><br>
-            <span class="card-title">Update Profile Details</span>
-            <hr>
-            <a href="{% url 'main_web_portal:personalDetails' %}">
-              <button  type="button" name="" class="btn btn-success">Update</button>
-            </a>         
+            <div style="height:56%;">
+              <span class="card-title">Update Profile Details</span>
+              <hr>
+              <a href="{% url 'main_web_portal:personalDetails' %}">
+                <button  type="button" name="" class="btn btn-success">Update</button>
+              </a>
+            </div>         
             
           </div>
         </div>
 
         <div class="col-md-4">
           <div class="card">
-            <span class="card-title">Email Authentication</span>
-            <hr>
-            {% if isAuth1 %}
-              <div align="center">
-                <img src="https://cdn1.iconfinder.com/data/icons/toolbar-signs/512/OK-512.png" align="middle" height="72" width="72">
-              </div>
-              <br>
-            {% else %}
-              <div align="center">
-                <img src="https://icon-icons.com/icons2/1154/PNG/512/1486564399-close_81512.png" align="middle" height="72" width="72">
-              </div>
-              <br>
-              <a href="{% url 'main_web_portal:verify1' %}">
-                <button type="button" name="" class="btn btn-success">Authenticate</button>
-              </a>
-              <br>
-            {% endif %}
+            <div style="height:44%;">
+              <span class="card-title">Email Authentication</span>
+              <hr>
+              {% if isAuth1 %}
+                <div align="center">
+                  <img src="https://cdn1.iconfinder.com/data/icons/toolbar-signs/512/OK-512.png" align="middle" height="72" width="72">
+                </div>
+                <br>
+              {% else %}
+                <div align="center">
+                  <img src="https://icon-icons.com/icons2/1154/PNG/512/1486564399-close_81512.png" align="middle" height="72" width="72">
+                </div>
+                <br>
+                <a href="{% url 'main_web_portal:verify1' %}">
+                  <button type="button" name="" class="btn btn-success">Authenticate</button>
+                </a>
+                <br>
+              {% endif %}
+            </div>
             
-            <br><br><br><br><br>
-            <span class="card-title">Physical Address Authentication</span>
-            <hr>
-            {% if isAuth2 %}
-              <div align="center">
-                <img src="https://cdn1.iconfinder.com/data/icons/toolbar-signs/512/OK-512.png" align="middle" height="72" width="72">
-              </div>
-              <br>
-            {% else %}
-              <div align="center">
-                <img src="https://icon-icons.com/icons2/1154/PNG/512/1486564399-close_81512.png" align="middle" height="72" width="72">
-              </div>
-              <br>
-              <a href="{% url 'main_web_portal:verify2' %}">
-                <button  type="button" name="" class="btn btn-success">Authenticate</button>
-              </a>
-              <br>
-            {% endif %}
+            <div style="height:56%;">
+              <span class="card-title">Physical Address Authentication</span>
+              <hr>
+              {% if isAuth2 %}
+                <div align="center">
+                  <img src="https://cdn1.iconfinder.com/data/icons/toolbar-signs/512/OK-512.png" align="middle" height="72" width="72">
+                </div>
+                <br>
+              {% else %}
+                <div align="center">
+                  <img src="https://icon-icons.com/icons2/1154/PNG/512/1486564399-close_81512.png" align="middle" height="72" width="72">
+                </div>
+                <br>
+                <a href="{% url 'main_web_portal:verify2' %}">
+                  <button  type="button" name="" class="btn btn-success">Authenticate</button>
+                </a>
+                <br>
+              {% endif %}
+            </div>
           </div>
         </div>
       </div>
