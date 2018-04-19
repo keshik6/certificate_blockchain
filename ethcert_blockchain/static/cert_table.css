@@ -41,6 +41,10 @@ td{
   border-bottom: solid 1px rgba(255,255,255,0.1);
 }
 
+tr:hover{
+  background: rgba(255,255,255,0.15);
+  box-shadow: 1px 1px 1px #AFEFEF;
+}
 
 /* for custom scrollbar for webkit browser*/
 
