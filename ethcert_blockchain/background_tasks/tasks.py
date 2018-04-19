@@ -60,7 +60,7 @@ def fetch_certificates():
 
         # no one could have made a certificate in 1970 on this contract
         if create_t == 0:
-            break;
+            break
 
         # take the data and put into our database
         try:
