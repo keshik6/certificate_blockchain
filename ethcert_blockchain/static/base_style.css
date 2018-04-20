@@ -104,10 +104,6 @@ a:link {
   color: #FF7F44;
 }
 
-a:visited {
-  color: #8E8E8E;
-}
-
 a:active {
   color: #FF3B3F;
 }
@@ -156,17 +152,6 @@ a:hover {
   justify-content: center;
 }
 
-p {
-  color: #EFEFEF;
-}
-
-h2 {
-  color: #EFEFEF;
-}
-
-h3 {
-  color: #EFEFEF;
-}
 .my-4{
   background-color: black !important;
   border-color: black !important;

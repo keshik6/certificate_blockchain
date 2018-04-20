@@ -1,0 +1,32 @@
+h1 {
+ color: #f1f1f1;
+}
+
+h2 {
+  color: #f1f1f1;
+}
+
+h3 {
+  color: #f1f1f1;
+}
+
+p {
+  color: #f1f1f1;
+}
+
+a:link {
+  color: #FF7F44;
+}
+
+.ourTeam {
+  color: #FF7F44;
+}
+
+a:active {
+  color: #FF3B3F;
+}
+
+a:hover {
+  color: #FF3B3F;
+}
+
