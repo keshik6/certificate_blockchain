@@ -20,7 +20,7 @@ hexbytes==0.1.0
 idna==2.6
 kombu==4.1.0
 lru-dict==1.1.6
-Pillow==5.0.0
+Pillow==9.0.1
 psycopg2==2.7.4
 pycryptodome==3.5.1
 python-dateutil==2.7.2
